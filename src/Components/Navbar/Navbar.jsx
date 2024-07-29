@@ -2,6 +2,7 @@ import { useState } from "react";
 import { GiMedicines } from "react-icons/gi";
 import { Link, NavLink } from "react-router-dom";
 import { FaCartShopping } from "react-icons/fa6";
+import Logo from "../Logo/Logo";
 
 const NavBar = () => {
     const [isOpen, setIsOpen] = useState(true)
@@ -10,11 +11,7 @@ const NavBar = () => {
             <div className="container px-6 py-4 mx-auto">
                 <div className="lg:flex lg:items-center lg:justify-between">
                     <div className="flex items-center justify-between">
-                        <Link to={'/'} className="font-lijeva font-bold text-3xl text-[#0394fc] flex items-center space-x-1">
-                            <h1>MediNexus</h1>
-                            <GiMedicines />
-                        </Link>
-
+                        <Logo />
                         {/* Mobile menu button */}
                         <div className="flex lg:hidden font-poppins">
                             <button
@@ -77,6 +74,7 @@ const NavBar = () => {
                                 <option value="bangla">Bangla</option>
                             </select>
                             <NavLink
+                                to={'/login'}
                                 className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
                             >
                                 Join US
