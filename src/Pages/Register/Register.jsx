@@ -1,13 +1,55 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Logo from '../../Components/Logo/Logo'
 import { Link } from 'react-router-dom'
+import useAuth from '../../Hooks/useAuth/useAuth'
+import toast from 'react-hot-toast';
+
 
 export default function Register() {
+    const { createUser, updateProfile } = useAuth();
+
+    const handleRegisterUser = (event) => {
+        event.preventDefault();
+
+        const form = event.target;
+        const name = form.name.value;
+        const image = form.image.files[0];
+        const role = form.role.value;
+        const email = form.email.value;
+        const password = form.password.value;
+        const confirmPassword = form.confirmPassword.value;
+
+        const user = {
+            name, image, role, email, password, confirmPassword
+        }
+
+        if(password !== confirmPassword){
+            toast.error('Password and confirm password should be same!')
+            return;
+        }
+
+        if(!password.length >= 6){
+            toast.error("Your password must be more than or equal 6 characters!")
+            return;
+        }
+
+        if(!/^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,}$/.test(password)){
+            toast.error("Your password must have at least one uppercase, one lowercase and one special character!")
+            return;
+        }
+
+        console.log(user)
+    }
+
+    const handleImageInputChange = () => {
+        toast.success("Image selection successful!")
+    }
+
     return (
         <div className='py-12'>
             <section className="bg-white dark:bg-gray-900">
                 <div className="container flex items-center justify-center min-h-screen px-6 mx-auto">
-                    <form className="w-full max-w-md">
+                    <form className="w-full max-w-md" onSubmit={handleRegisterUser}>
                         <div className="flex justify-center mx-auto">
                             <Logo />
                         </div>
@@ -26,7 +68,7 @@ export default function Register() {
                                 </svg>
                             </span>
 
-                            <input type="text" className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Username" />
+                            <input type="text" name='name' className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Username" />
                         </div>
 
                         <label htmlFor="dropzone-file" className="flex items-center px-3 py-3 mx-auto mt-6 text-center bg-white border-2 border-dashed rounded-lg cursor-pointer dark:border-gray-600 dark:bg-gray-900">
@@ -34,10 +76,35 @@ export default function Register() {
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
                             </svg>
 
-                            <h2 className="mx-3 text-gray-400">Profile Photo</h2>
+                            <h2 className="mx-3 text-gray-400">Update Profile</h2>
 
-                            <input id="dropzone-file" type="file" className="hidden" />
+                            <input id="dropzone-file" type="file" onChange={handleImageInputChange} className="hidden" name='image' />
+
                         </label>
+
+                        <div className="relative flex items-center mt-6 border-2 border-gray-300 rounded-lg p-3 text-gray-300">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                                width="24"
+                                height="24"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M5.121 17.804A6.968 6.968 0 0112 15a6.968 6.968 0 016.879 2.804M9 11a3 3 0 116 0 3 3 0 01-6 0zM3 20a9 9 0 1118 0v1H3v-1z"
+                                />
+                            </svg>
+
+                            <select name="role" className='w-full outline-none'>
+                                <option value="">Select a role</option>
+                                <option value="user" className='text-black font-ubuntu'>User</option>
+                                <option value="seller" className='text-black font-ubuntu'>Seller</option>
+                            </select>
+                        </div>
 
                         <div className="relative flex items-center mt-6">
                             <span className="absolute">
@@ -46,7 +113,7 @@ export default function Register() {
                                 </svg>
                             </span>
 
-                            <input type="email" className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Email address" />
+                            <input type="email" name='email' className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Email address" />
                         </div>
 
                         <div className="relative flex items-center mt-4">
@@ -56,7 +123,7 @@ export default function Register() {
                                 </svg>
                             </span>
 
-                            <input type="password" className="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Password" />
+                            <input type="password" name='password' className="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Password" />
                         </div>
 
                         <div className="relative flex items-center mt-4">
@@ -66,7 +133,7 @@ export default function Register() {
                                 </svg>
                             </span>
 
-                            <input type="password" className="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Confirm Password" />
+                            <input type="password" name='confirmPassword' className="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Confirm Password" />
                         </div>
 
                         <div className="mt-6">
