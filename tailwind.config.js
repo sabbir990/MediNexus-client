@@ -9,7 +9,8 @@ export default {
       fontFamily : {
         'lijeva' : ['Playwrite HR Lijeva', 'cursive'],
         'poppins' : ['Poppins', 'sans-serif'],
-        'roboto' : ['Roboto', 'sans-serif']
+        'roboto' : ['Roboto', 'sans-serif'],
+        'ubuntu' : ['Ubuntu', 'sans-serif']
       }
     },
   },

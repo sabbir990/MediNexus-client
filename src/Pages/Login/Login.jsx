@@ -1,5 +1,6 @@
 import React from 'react'
 import Logo from '../../Components/Logo/Logo'
+import { Link } from 'react-router-dom'
 
 export default function Login() {
     return (
@@ -70,7 +71,7 @@ export default function Login() {
                     <div className="flex items-center justify-between mt-4">
                         <span className="w-1/5 border-b dark:border-gray-600 md:w-1/4"></span>
 
-                        <a href="#" className="text-xs text-gray-500 uppercase dark:text-gray-400 hover:underline">or sign up</a>
+                        <Link to={'/register'} className="text-xs text-gray-500 uppercase dark:text-gray-400 hover:underline">or sign up</Link>
 
                         <span className="w-1/5 border-b dark:border-gray-600 md:w-1/4"></span>
                     </div>
