@@ -5,7 +5,13 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily : {
+        'lijeva' : ['Playwrite HR Lijeva', 'cursive'],
+        'poppins' : ['Poppins', 'sans-serif'],
+        'roboto' : ['Roboto', 'sans-serif']
+      }
+    },
   },
   plugins: [
     require('daisyui'),
