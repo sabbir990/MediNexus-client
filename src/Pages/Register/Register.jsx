@@ -1,14 +1,20 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Logo from '../../Components/Logo/Logo'
-import { Link } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import useAuth from '../../Hooks/useAuth/useAuth'
 import toast from 'react-hot-toast';
+import useHostImage from '../../Hooks/useHostImage/useHostImage';
+import { FaSpinner } from "react-icons/fa";
 
 
 export default function Register() {
-    const { createUser, updateProfile } = useAuth();
+    const { user, loading, setLoading, createUser, updateUserProfile } = useAuth();
+    const location = useLocation();
+    const navigate = useNavigate();
 
-    const handleRegisterUser = (event) => {
+    console.log(user)
+
+    const handleRegisterUser = async (event) => {
         event.preventDefault();
 
         const form = event.target;
@@ -19,26 +25,44 @@ export default function Register() {
         const password = form.password.value;
         const confirmPassword = form.confirmPassword.value;
 
-        const user = {
-            name, image, role, email, password, confirmPassword
-        }
 
-        if(password !== confirmPassword){
+        if (password !== confirmPassword) {
+            setLoading(true)
             toast.error('Password and confirm password should be same!')
-            return;
+            return setLoading(false)
         }
 
-        if(!password.length >= 6){
-            toast.error("Your password must be more than or equal 6 characters!")
-            return;
-        }
-
-        if(!/^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,}$/.test(password)){
+        if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>])(?=.{6,})/.test(password)) {
+            setLoading(true)
             toast.error("Your password must have at least one uppercase, one lowercase and one special character!")
-            return;
+            return setLoading(false)
         }
 
-        console.log(user)
+        if(!image) {
+            setLoading(true)
+            toast.error("Select an image first")
+            return  setLoading(false)
+        }
+
+        try {
+            setLoading(true)
+
+            const image_url = await useHostImage(image);
+            const registration = await createUser(email, password);
+            if (registration.user) {
+                await updateUserProfile(name, image_url);
+            }
+
+            toast.success('Registration successful!')
+            navigate('/')
+
+        } catch (error) {
+
+            console.log(error.message)
+            toast.error(error.message)
+            setLoading(false)
+
+        }
     }
 
     const handleImageInputChange = () => {
@@ -46,7 +70,7 @@ export default function Register() {
     }
 
     return (
-        <div className='py-12'>
+        <div className='py-12 flex items-center justify-center'>
             <section className="bg-white dark:bg-gray-900">
                 <div className="container flex items-center justify-center min-h-screen px-6 mx-auto">
                     <form className="w-full max-w-md" onSubmit={handleRegisterUser}>
@@ -82,7 +106,7 @@ export default function Register() {
 
                         </label>
 
-                        <div className="relative flex items-center mt-6 border-2 border-gray-300 rounded-lg p-3 text-gray-300">
+                        <div className="relative flex items-center mt-6 border-2 border-gray-300 rounded-lg p-3 text-black">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
@@ -138,7 +162,7 @@ export default function Register() {
 
                         <div className="mt-6">
                             <button className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
-                                Sign Up
+                                {loading ? <FaSpinner className='animate-spin flex items-center justify-center' /> : 'Sign Up'}
                             </button>
 
                             <div className="mt-6 text-center ">

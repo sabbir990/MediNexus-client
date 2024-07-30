@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { GiMedicines } from "react-icons/gi";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { FaCartShopping } from "react-icons/fa6";
 import Logo from "../Logo/Logo";
 
@@ -69,7 +68,7 @@ const NavBar = () => {
                             >
                                 Shop
                             </NavLink>
-                            <select name="language" className="rounded-md">
+                            <select name="language" className="rounded-md p-5 outline-none">
                                 <option value="english">English</option>
                                 <option value="bangla">Bangla</option>
                             </select>

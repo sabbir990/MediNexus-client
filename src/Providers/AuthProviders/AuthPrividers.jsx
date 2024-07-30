@@ -8,7 +8,7 @@ export const AuthContext = createContext(null);
 
 export default function AuthProvider({children}) {
     const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
     const googleProvider = new GoogleAuthProvider();
     const githubProvider = new GithubAuthProvider();
 
@@ -32,7 +32,7 @@ export default function AuthProvider({children}) {
         return signInWithPopup(auth, githubProvider);
     }
 
-    const updateUserProfile = () => {
+    const updateUserProfile = (name, image) => {
         setLoading(true);
         return updateProfile(auth.currentUser, {
             displayName : name,
@@ -41,6 +41,7 @@ export default function AuthProvider({children}) {
     }
 
     const logOut = () => {
+        setLoading(true)
         return signOut();
     }
 
@@ -48,10 +49,6 @@ export default function AuthProvider({children}) {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             if(currentUser){
                 setUser(currentUser)
-                console.log(currentUser);
-            }
-            else{
-                console.log("Already logged out!")
             }
 
             setLoading(false);
@@ -69,7 +66,7 @@ export default function AuthProvider({children}) {
         signIn,
         googleSignIn,
         githubSignIn,
-        updateProfile,
+        updateUserProfile,
         logOut,
         loading,
         setLoading
