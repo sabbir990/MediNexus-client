@@ -6,7 +6,7 @@ import toast from 'react-hot-toast'
 import { FaSpinner } from 'react-icons/fa'
 
 export default function Login() {
-    const {user, signIn, googleSignIn, githubSignIn, loading, setLoading} = useAuth()
+    const {signIn, googleSignIn, githubSignIn, loading, setLoading, saveUser} = useAuth();
     const location = useLocation()
     const navigate = useNavigate()
     const handleLoginSubmit = async(event) => {
@@ -15,8 +15,6 @@ export default function Login() {
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
-
-        console.log(email, password)
 
         try{
             setLoading(true)
@@ -27,6 +25,8 @@ export default function Login() {
             }else{
                 navigate('/')
             }
+
+            saveUser()
 
         }catch(error){
                 
@@ -53,8 +53,6 @@ export default function Login() {
             setLoading(false)
         }
     }
-
-    console.log(loading)
 
     const handleGitHubSignIn = async() => {
         try{

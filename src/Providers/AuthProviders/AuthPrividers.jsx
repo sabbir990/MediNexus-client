@@ -2,6 +2,8 @@ import { createContext, useEffect, useState } from "react";
 import React from 'react'
 import auth from "../../Firebase/Firebase.config";
 import { GithubAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
+import { useMutation } from "@tanstack/react-query";
+import useAxiosCommon from "../../Hooks/useAxiosCommon/useAxiosCommon";
 
 export const AuthContext = createContext(null);
 
@@ -11,6 +13,14 @@ export default function AuthProvider({children}) {
     const [loading, setLoading] = useState(true)
     const googleProvider = new GoogleAuthProvider();
     const githubProvider = new GithubAuthProvider();
+    const axiosCommon = useAxiosCommon();
+
+    const {mutateAsync} = useMutation({
+        mutationFn : async (user) => {
+            const {data} = await axiosCommon.put('/user', user)
+            return data
+        }
+    })
 
     const createUser = (email, password) => {
         setLoading(true)
@@ -45,10 +55,24 @@ export default function AuthProvider({children}) {
         return signOut(auth);
     }
 
+    const saveUser = async(currentUser) => {
+        const createdUser = {
+            email : currentUser?.email,
+            name : currentUser?.displayName,
+            role : "user",
+            image : currentUser?.photoURL
+        }
+
+        await mutateAsync(createdUser)
+    }
+
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             if(currentUser){
                 setUser(currentUser)
+                if(currentUser?.providerData[0]?.providerId !== 'password'){
+                    saveUser(currentUser)
+                }
             }
 
             setLoading(false);
@@ -57,7 +81,7 @@ export default function AuthProvider({children}) {
         return () => {
             unsubscribe()
         }
-    })
+    }, [])
 
     const authObject = {
         user,
@@ -69,7 +93,8 @@ export default function AuthProvider({children}) {
         updateUserProfile,
         logOut,
         loading,
-        setLoading
+        setLoading,
+        saveUser
     }
   return (
     <AuthContext.Provider value={authObject}>

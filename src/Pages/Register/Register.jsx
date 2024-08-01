@@ -17,7 +17,7 @@ export default function Register() {
 
     const {mutateAsync} = useMutation({
         mutationFn : async (user) => {
-            const {data} = await axiosCommon.post('/user', user)
+            const {data} = await axiosCommon.put('/user', user)
             return data
         }
     })
@@ -56,20 +56,17 @@ export default function Register() {
             setLoading(true)
 
             const image_url = await useHostImage(image);
-            const registration = await createUser(email, password);
-            if (registration.user) {
-                await updateUserProfile(name, image_url);
-            }
-
+            await createUser(email, password);
+            await updateUserProfile(name, image_url);
+            
             const user = {
-                name, image, role, email
+                name, image_url, role, email
             }
             
             toast.success('Registration successful!')
             navigate('/')
 
             const postResult = await mutateAsync(user)
-            console.log(postResult)
 
 
         } catch (error) {
@@ -177,8 +174,8 @@ export default function Register() {
                         </div>
 
                         <div className="mt-6">
-                            <button disabled={loading} className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
-                                {loading ? <FaSpinner className='animate-spin flex items-center justify-center' /> : 'Sign Up'}
+                            <button disabled={loading} className="w-full flex items-center justify-center px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+                                {loading ? <FaSpinner className='animate-spin' /> : 'Sign Up'}
                             </button>
 
                             <div className="mt-6 text-center ">
