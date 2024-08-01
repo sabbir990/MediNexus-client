@@ -3,10 +3,10 @@ import Logo from '../../Components/Logo/Logo'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import useAuth from '../../Hooks/useAuth/useAuth'
 import toast from 'react-hot-toast'
+import { FaSpinner } from 'react-icons/fa'
 
 export default function Login() {
     const {user, signIn, googleSignIn, githubSignIn, loading, setLoading} = useAuth()
-    console.log(user)
     const location = useLocation()
     const navigate = useNavigate()
     const handleLoginSubmit = async(event) => {
@@ -53,6 +53,8 @@ export default function Login() {
             setLoading(false)
         }
     }
+
+    console.log(loading)
 
     const handleGitHubSignIn = async() => {
         try{
@@ -132,7 +134,8 @@ export default function Login() {
 
                     <div className="mt-6">
                         <button className=" form-control flex items-center justify-center w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-gray-800 rounded-lg hover:bg-gray-700 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-50">
-                            Sign In
+                    
+                            {loading && loading ? <FaSpinner className='animate-spin' /> : "Sign In"}
                         </button>
                     </div>
                 </form>

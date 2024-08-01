@@ -4,15 +4,23 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import useAuth from '../../Hooks/useAuth/useAuth'
 import toast from 'react-hot-toast';
 import useHostImage from '../../Hooks/useHostImage/useHostImage';
-import { FaSpinner } from "react-icons/fa";
+import { FaSpinner } from "react-icons/fa"
+import { useMutation } from '@tanstack/react-query';
+import useAxiosCommon from '../../Hooks/useAxiosCommon/useAxiosCommon';
 
 
 export default function Register() {
-    const { user, loading, setLoading, createUser, updateUserProfile } = useAuth();
+    const { loading, setLoading, createUser, updateUserProfile } = useAuth();
     const location = useLocation();
     const navigate = useNavigate();
+    const axiosCommon = useAxiosCommon()
 
-    console.log(user)
+    const {mutateAsync} = useMutation({
+        mutationFn : async (user) => {
+            const {data} = await axiosCommon.post('/user', user)
+            return data
+        }
+    })
 
     const handleRegisterUser = async (event) => {
         event.preventDefault();
@@ -53,8 +61,16 @@ export default function Register() {
                 await updateUserProfile(name, image_url);
             }
 
+            const user = {
+                name, image, role, email
+            }
+            
             toast.success('Registration successful!')
             navigate('/')
+
+            const postResult = await mutateAsync(user)
+            console.log(postResult)
+
 
         } catch (error) {
 
@@ -161,7 +177,7 @@ export default function Register() {
                         </div>
 
                         <div className="mt-6">
-                            <button className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+                            <button disabled={loading} className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
                                 {loading ? <FaSpinner className='animate-spin flex items-center justify-center' /> : 'Sign Up'}
                             </button>
 

@@ -116,11 +116,11 @@ const NavBar = () => {
                                 <li><p className="text-center font-bold">{user && user.displayName && user.displayName}</p></li>
                                 <li>
                                     <a className="justify-between">
-                                        Profile
+                                        Update Profile
                                         <span className="badge">New</span>
                                     </a>
                                 </li>
-                                <li><a>Settings</a></li>
+                                <li><a>Dashboard</a></li>
                                 <li><button onClick={ logOutUser}>Logout</button></li>
                             </ul>
                         </div>}
