@@ -4,16 +4,15 @@ import { Outlet } from 'react-router-dom'
 import useRole from '../../Hooks/useRole/useRole'
 
 export default function DashboardLayout() {
-    const user = useRole();
-    const role = user?.role;
+    const role = useRole();
     return (
         <div>
             {/* Sidebar for dashboard */}
-            <div>
+            <div className='flex-1'>
                 <Sidebar role={role} />
             </div>
             {/* Contents through sidebar */}
-            <div>
+            <div className='lg:ml-72'>
                 <Outlet />
             </div>
         </div>

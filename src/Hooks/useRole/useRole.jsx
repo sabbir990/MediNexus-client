@@ -6,14 +6,13 @@ export default function useRole() {
     const { user, loading } = useAuth();
     const axiosCommon = useAxiosCommon()
 
-    const { data } = useQuery({
+    const { data : role } = useQuery({
         queryKey: ['role', user?.email],
         enabled : !loading || !!user,
         queryFn: async () => {
             const { data } = await axiosCommon.get(`/user/${user?.email}`);
-            console.log(data);
-            return data;
+            return data?.role;
         }
     })
-    return data
+    return role
 }

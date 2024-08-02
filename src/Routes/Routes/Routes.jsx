@@ -5,6 +5,7 @@ import Login from "../../Pages/Login/Login";
 import Register from "../../Pages/Register/Register";
 import DashboardLayout from "../../Components/Dasboard/DashboardLayout";
 import SellerHomepage from "../../Components/Dasboard/Seller Statistics/SellerHomepage";
+import Profile from "../../Components/Dasboard/Profile/Profile";
 
 const router = createBrowserRouter([
     {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
             {
                 path : 'seller-homepage',
                 element : <SellerHomepage />
+            },
+            {
+                path : '/dashboard/profile',
+                element : <Profile />
             }
         ]
     }
