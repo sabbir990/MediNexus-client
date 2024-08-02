@@ -2,8 +2,8 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { FaCartShopping } from "react-icons/fa6";
 import Logo from "../Logo/Logo";
-import useAuth from "../../Hooks/useAuth/useAuth";
 import toast from "react-hot-toast";
+import useAuth from '../../Hooks/useAuth/useAuth'
 
 const NavBar = () => {
     const {user, logOut, setUser, setLoading} = useAuth()
@@ -120,7 +120,7 @@ const NavBar = () => {
                                         <span className="badge">New</span>
                                     </a>
                                 </li>
-                                <li><a>Dashboard</a></li>
+                                <li><NavLink to={'/dashboard'}>Dashboard</NavLink></li>
                                 <li><button onClick={ logOutUser}>Logout</button></li>
                             </ul>
                         </div>}
