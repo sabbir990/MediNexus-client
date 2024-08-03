@@ -1,12 +1,16 @@
 import { useMutation } from '@tanstack/react-query';
-import React from 'react'
+import React, { useState } from 'react'
 import useAxiosSecure from '../../../Hooks/useAxiosSecure/useAxiosSecure';
 import toast from 'react-hot-toast';
 import Swal from 'sweetalert2';
+import UpdateMedicine from '../Update Medicine/UpdateMedicine';
 
 export default function MedicineRows({ medicine, reFetch }) {
     const { _id, itemName, itemGenericName, shortDescription, itemImage, category, company, itemMassUnit, perUnitPrice, discount } = medicine;
     const axiosSecure = useAxiosSecure()
+    const [isUpdate, setIsUpdate] = useState(false)
+
+    console.log(_id)
 
 
     const { mutateAsync } = useMutation({
@@ -47,6 +51,10 @@ export default function MedicineRows({ medicine, reFetch }) {
             toast.error(error.message)
         }
 
+    }
+
+    const handleUpdatePopup = () => {
+        setIsUpdate(!isUpdate)
     }
     return (
         <tr>
@@ -91,7 +99,9 @@ export default function MedicineRows({ medicine, reFetch }) {
                 scope='col'
                 className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
             >
-                <button className='btn btn-warning text-white'>Update</button>
+                <button className='btn btn-warning text-white' onClick={handleUpdatePopup}>Update</button>
+
+                <UpdateMedicine isOpen={isUpdate} setIsOpen={setIsUpdate} id={_id}/>
             </th>
         </tr>
 
