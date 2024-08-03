@@ -2,10 +2,24 @@ import { Helmet } from 'react-helmet-async'
 import useAuth from '../../../Hooks/useAuth/useAuth'
 import AddMedicineModal from '../Add Medicine Modal/AddMedicineModal';
 import { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import useAxiosSecure from '../../../Hooks/useAxiosSecure/useAxiosSecure';
+import MedicineRows from '../Medicine Rows/MedicineRows';
 
 const ManageMedicines = () => {
     const { user } = useAuth();
     const [isOpen, setIsOpen] = useState(false)
+    const axiosSecure = useAxiosSecure();
+
+    const { data: medicines = [], isLoading, reFetch } = useQuery({
+        queryKey: ['medicines', user?.email],
+        queryFn: async () => {
+            const { data } = await axiosSecure.get(`/medicines/${user?.email}`);
+            return data;
+        }
+    })
+
+    // console.log(medicines)
 
     const handleIsOpen = () => {
         setIsOpen(true)
@@ -74,7 +88,13 @@ const ManageMedicines = () => {
                                     </tr>
                                 </thead>
                                 <AddMedicineModal isOpen={isOpen} setIsOpen={setIsOpen} />
-                                <tbody>{/* Room row data */}</tbody>
+                                <tbody>
+                                    {
+                                        medicines?.map((medicine, index) => {
+                                            return <MedicineRows key={medicine?._id} medicine={medicine}/>
+                                        })
+                                    }
+                                </tbody>
                             </table>
                         </div>
                     </div>
