@@ -5,21 +5,17 @@ import useHostImage from '../../../Hooks/useHostImage/useHostImage';
 import { useMutation,useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure/useAxiosSecure';
 
-export default function UpdateMedicine({ isOpen, setIsOpen, id }) {
+export default function UpdateMedicine({ isOpen, setIsOpen, _id}) {
 
-    const {user} = useAuth()
-    const axiosSecure = useAxiosSecure()
+    const axiosSecure = useAxiosSecure();
 
-    const {data : medicine, isLoading, refetch} = useQuery({
-        queryKey : ['medicine'],
-        enabled : !!id,
+    const {data : updatableMedicine} = useQuery({
+        queryKey : ['updatableMedicine', _id],
         queryFn : async() => {
-            const {data} = await axiosSecure.get(`/medicine/${id}`)
-            return data;
+            const {data} = await axiosSecure.get(`/medicine/${_id}`);
+            return data
         }
     })
-
-    console.log(medicine)
 
     const handleAddMedicineSubmit = async (event) => {
         event.preventDefault()
@@ -74,7 +70,7 @@ export default function UpdateMedicine({ isOpen, setIsOpen, id }) {
 
                                     </span>
 
-                                    <input type="text" name='itemName' className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Item Name" />
+                                    <input type="text" defaultValue={updatableMedicine?.itemName} name='itemName' className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Item Name" />
                                 </div>
                                 <div className="relative flex items-center mt-8">
                                     <span className="absolute">
@@ -83,11 +79,11 @@ export default function UpdateMedicine({ isOpen, setIsOpen, id }) {
                                         </svg>
                                     </span>
 
-                                    <input type="text" name='itemGenericName' className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Item Generic Name" />
+                                    <input type="text" defaultValue={updatableMedicine?.itemGenericName}  name='itemGenericName' className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Item Generic Name" />
                                 </div>
                                 <div className="flex items-center mt-8">
 
-                                    <textarea name="shortDescription" className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-4 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder='Short Description' id="" cols="30" rows="10"></textarea>
+                                    <textarea name="shortDescription" defaultValue={updatableMedicine?.shortDescription} className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-4 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder='Short Description' id="" cols="30" rows="10"></textarea>
                                 </div>
                                 <div className="relative mt-8">
                                     <p className='font-bold font-roboto'>Upload Image</p>
@@ -110,7 +106,7 @@ export default function UpdateMedicine({ isOpen, setIsOpen, id }) {
 
                                     </span>
 
-                                    <select name="category" className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40">
+                                    <select name="category" defaultValue={updatableMedicine?.category} className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40">
                                         <option value="No category selected!">Select a category</option>
                                         <option value="Analgastics">Analgastics</option>
                                         <option value="Antibiotics">Antibiotics</option>
@@ -142,7 +138,7 @@ export default function UpdateMedicine({ isOpen, setIsOpen, id }) {
 
                                     </span>
 
-                                    <select name="company" className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40">
+                                    <select name="company" defaultValue={updatableMedicine?.company} className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40">
                                         <option value="No company selected!">Select a company</option>
                                         <option value="Pfizer">Pfizer</option>
                                         <option value="Johnson & Johnson">Johnson & Johnson</option>
@@ -175,7 +171,7 @@ export default function UpdateMedicine({ isOpen, setIsOpen, id }) {
 
                                     </span>
 
-                                    <select name="itemMassUnit" className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40">
+                                    <select name="itemMassUnit" defaultValue={updatableMedicine?.itemMassUnit} className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40">
                                         <option value="Nothing have selected by the seller">Mg or Ml</option>
                                         <option value="Mg">MG</option>
                                         <option value="Ml">ML</option>
@@ -189,7 +185,7 @@ export default function UpdateMedicine({ isOpen, setIsOpen, id }) {
 
                                     </span>
 
-                                    <input type="number" name='perUnitPrice' className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Per Unit Price" />
+                                    <input type="number" defaultValue={updatableMedicine?.perUnitPrice} name='perUnitPrice' className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Per Unit Price" />
                                 </div>
                                 <div className="relative flex items-center mt-8">
                                     <span className="absolute">
@@ -199,7 +195,7 @@ export default function UpdateMedicine({ isOpen, setIsOpen, id }) {
 
                                     </span>
 
-                                    <input type="number" step={"0.01"} name='discount' className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Discount(%)" />
+                                    <input type="number" defaultValue={updatableMedicine?.discount} step={"0.01"} name='discount' className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Discount(%)" />
                                 </div>
 
                                 <div className="mt-4 sm:flex sm:items-center sm:-mx-2">

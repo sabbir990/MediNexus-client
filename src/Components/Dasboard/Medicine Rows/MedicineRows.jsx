@@ -1,4 +1,4 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react'
 import useAxiosSecure from '../../../Hooks/useAxiosSecure/useAxiosSecure';
 import toast from 'react-hot-toast';
@@ -10,7 +10,13 @@ export default function MedicineRows({ medicine, reFetch }) {
     const axiosSecure = useAxiosSecure()
     const [isUpdate, setIsUpdate] = useState(false)
 
-    console.log(_id)
+    // const {data : updatableMedicine, isLoading, refetch} = useQuery({
+    //     queryKey : ['updatableMedicine'],
+    //     queryFn : async() => {
+    //         const {data} = await axiosSecure.get(`/medicine/${_id}`);
+    //         return data
+    //     }
+    // })
 
 
     const { mutateAsync } = useMutation({
@@ -55,6 +61,7 @@ export default function MedicineRows({ medicine, reFetch }) {
 
     const handleUpdatePopup = () => {
         setIsUpdate(!isUpdate)
+
     }
     return (
         <tr>
@@ -101,7 +108,7 @@ export default function MedicineRows({ medicine, reFetch }) {
             >
                 <button className='btn btn-warning text-white' onClick={handleUpdatePopup}>Update</button>
 
-                <UpdateMedicine isOpen={isUpdate} setIsOpen={setIsUpdate} id={_id}/>
+                {isUpdate && <UpdateMedicine isOpen={isUpdate} setIsOpen={setIsUpdate} _id={_id}/>}
             </th>
         </tr>
 
