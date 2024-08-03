@@ -11,7 +11,7 @@ const ManageMedicines = () => {
     const [isOpen, setIsOpen] = useState(false)
     const axiosSecure = useAxiosSecure();
 
-    const { data: medicines = [], isLoading, reFetch } = useQuery({
+    const { data: medicines = [], isLoading, refetch } = useQuery({
         queryKey: ['medicines', user?.email],
         queryFn: async () => {
             const { data } = await axiosSecure.get(`/medicines/${user?.email}`);
@@ -87,11 +87,11 @@ const ManageMedicines = () => {
                                         </th>
                                     </tr>
                                 </thead>
-                                <AddMedicineModal isOpen={isOpen} setIsOpen={setIsOpen} />
+                                <AddMedicineModal refetch={refetch} isOpen={isOpen} setIsOpen={setIsOpen} />
                                 <tbody>
                                     {
                                         medicines?.map((medicine, index) => {
-                                            return <MedicineRows key={medicine?._id} medicine={medicine}/>
+                                            return <MedicineRows key={medicine?._id} medicine={medicine} reFetch={refetch}/>
                                         })
                                     }
                                 </tbody>

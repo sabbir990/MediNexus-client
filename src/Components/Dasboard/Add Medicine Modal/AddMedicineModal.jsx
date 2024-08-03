@@ -5,7 +5,7 @@ import useHostImage from '../../../Hooks/useHostImage/useHostImage';
 import { useMutation } from '@tanstack/react-query';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure/useAxiosSecure';
 
-export default function AddMedicineModal({ isOpen, setIsOpen }) {
+export default function AddMedicineModal({ isOpen, setIsOpen, refetch }) {
     const {user} = useAuth();
     const axiosSecure = useAxiosSecure()
 
@@ -53,6 +53,8 @@ export default function AddMedicineModal({ isOpen, setIsOpen }) {
             }
 
             await mutateAsync(product);
+
+            refetch()
         }catch(error){
             console.log(error.message);
             
