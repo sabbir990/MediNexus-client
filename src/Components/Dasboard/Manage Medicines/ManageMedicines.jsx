@@ -32,7 +32,7 @@ const ManageMedicines = () => {
 
             <div className='container mx-auto px-4 sm:px-8'>
                 <div>
-                    <h1 className='flex items-center justify-center space-x-2 text-center text-3xl mt-20'><p>Manage Your Users</p> <p className='font-lijeva'>{user?.displayName}</p></h1>
+                    <h1 className='flex items-center justify-center space-x-2 text-center text-3xl mt-20'><p>Manage Your Medicines</p> <p className='font-lijeva'>{user?.displayName}</p></h1>
                 </div>
                 <div className='py-8'>
                     <div className='-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto space-y-4'>

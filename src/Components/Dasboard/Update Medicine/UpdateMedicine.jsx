@@ -6,6 +6,7 @@ import { useMutation,useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure/useAxiosSecure';
 
 export default function UpdateMedicine({ isOpen, setIsOpen, _id}) {
+    const {user} = useAuth()
 
     const axiosSecure = useAxiosSecure();
 
@@ -14,6 +15,18 @@ export default function UpdateMedicine({ isOpen, setIsOpen, _id}) {
         queryFn : async() => {
             const {data} = await axiosSecure.get(`/medicine/${_id}`);
             return data
+        }
+    })
+
+    const {mutateAsync} = useMutation({
+        mutationFn : async(updatedMedicine) => {
+            const {data} = await axiosSecure.patch(`/medicine`, updatedMedicine);
+            return data;
+        },
+        onSuccess : () => {
+            toast.success('Updating your item is successful!');
+
+            setIsOpen(false);
         }
     })
 
@@ -31,6 +44,29 @@ export default function UpdateMedicine({ isOpen, setIsOpen, _id}) {
         const perUnitPrice = form.perUnitPrice.value;
         const discount = form.discount.value;
         const email = user?.email;
+
+        try{
+            const itemImage_url = await useHostImage(itemImage)
+            const updatedMedicine = {
+                itemName,
+                itemGenericName,
+                shortDescription,
+                itemImage : itemImage_url,
+                category,
+                company,
+                itemMassUnit,
+                perUnitPrice,
+                discount,
+                email
+            }
+
+            const patchingResult = await mutateAsync(updatedMedicine)
+            console.log(patchingResult)
+
+        }catch(error){
+            console.log(error.message)
+            toast.error(error.message)
+        }
     }
     return (
         <div className="relative flex justify-center">
