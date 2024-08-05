@@ -17,7 +17,7 @@ export default function CategoryBox({ label, icon: Icon }) {
 
   }
   return (
-    <Link>
+    <Link to={`/category-items/${label}`}>
       <div
         onClick={handleFilterCategory}
         className={`flex 

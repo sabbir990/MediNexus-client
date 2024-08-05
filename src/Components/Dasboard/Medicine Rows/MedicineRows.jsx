@@ -10,14 +10,6 @@ export default function MedicineRows({ medicine, reFetch }) {
     const axiosSecure = useAxiosSecure()
     const [isUpdate, setIsUpdate] = useState(false)
 
-    // const {data : updatableMedicine, isLoading, refetch} = useQuery({
-    //     queryKey : ['updatableMedicine'],
-    //     queryFn : async() => {
-    //         const {data} = await axiosSecure.get(`/medicine/${_id}`);
-    //         return data
-    //     }
-    // })
-
 
     const { mutateAsync } = useMutation({
         mutationFn: async (id) => {

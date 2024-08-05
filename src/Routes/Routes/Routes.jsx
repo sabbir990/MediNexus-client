@@ -7,6 +7,7 @@ import DashboardLayout from "../../Components/Dasboard/DashboardLayout";
 import SellerHomepage from "../../Components/Dasboard/Seller Statistics/SellerHomepage";
 import Profile from "../../Components/Dasboard/Profile/Profile";
 import ManageMedicines from "../../Components/Dasboard/Manage Medicines/ManageMedicines";
+import CategoryItems from "../../Pages/Home/Categories/CategoryItems";
 
 const router = createBrowserRouter([
     {
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
                 path : '/',
                 element : <Home />
             },
+            {
+                path : '/category-items/:category',
+                element : <CategoryItems />
+            }
         ]
     },
     {
@@ -46,7 +51,7 @@ const router = createBrowserRouter([
             {
                 path : 'manage-medicines',
                 element : <ManageMedicines />
-            }
+            },
         ]
     }
 ])

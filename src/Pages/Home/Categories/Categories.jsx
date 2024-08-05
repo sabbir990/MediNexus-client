@@ -1,6 +1,5 @@
 import React from 'react'
 import CategoryBox from './CategoryBox'
-import CategoryItems from './CategoryItems'
 import categories from './CategoryData'
 
 export default function Categories() {
@@ -12,9 +11,6 @@ export default function Categories() {
                         return <CategoryBox key={index} label={category?.label} icon={category?.icon} />
                     })
                 }
-            </div>
-            <div>
-                <CategoryItems />
             </div>
         </div>
     )
