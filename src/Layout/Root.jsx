@@ -5,13 +5,17 @@ import { Outlet } from 'react-router-dom'
 export default function Root() {
   return (
     <div>
-        {/* Navbar */}
+      {/* Navbar */}
 
+      <div>
         <Navbar />
+      </div>
 
-        {/* Outlet */}
+      {/* Outlet */}
 
+      <div className='px-6'>
         <Outlet />
+      </div>
     </div>
   )
 }
