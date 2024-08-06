@@ -1,6 +1,7 @@
 import React from 'react'
 import Navbar from '../Components/Navbar/Navbar'
 import { Outlet } from 'react-router-dom'
+import Footer from '../Components/Dasboard/Footer/Footer'
 
 export default function Root() {
   return (
@@ -15,6 +16,10 @@ export default function Root() {
 
       <div className='px-6'>
         <Outlet />
+      </div>
+
+      <div>
+        <Footer />
       </div>
     </div>
   )
