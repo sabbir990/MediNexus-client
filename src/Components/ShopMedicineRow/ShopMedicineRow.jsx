@@ -2,11 +2,13 @@ import React, { useState } from 'react'
 import { FaEye } from "react-icons/fa6";
 import { FaShoppingCart } from "react-icons/fa";
 import ItemModal from '../Item details modal/itemModal';
+import AddToCartModal from '../Dasboard/AddToCartModal/AddToCartModal';
 
 
 export default function ShopMedicineRow({ medicine, reFetch }) {
     const { _id, itemName, itemGenericName, shortDescription, itemImage, category, company, itemMassUnit, perUnitPrice, discount } = medicine;
-    const [isOpen, setIsOpen] = useState(false)
+    const [isOpen, setIsOpen] = useState(false);
+    const [isOpenCartModal, setIsopenCartModal] = useState(false)
     return (
         <tr>
 
@@ -51,7 +53,8 @@ export default function ShopMedicineRow({ medicine, reFetch }) {
                 scope='col'
                 className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
             >
-                <button className='btn btn-warning text-white'><FaShoppingCart /></button>
+                <button className='btn btn-warning text-white' onClick={() => setIsopenCartModal(true)}><FaShoppingCart /></button>
+                <AddToCartModal isOpen={isOpenCartModal} setIsOpen={setIsopenCartModal} medicine={medicine} />
             </th>
         </tr>
 
