@@ -16,8 +16,6 @@ export default function CategoryItems() {
         }
     })
 
-    console.log(medicineByCategory)
-
     return (
         <div className='mt-8'>
             <div>
