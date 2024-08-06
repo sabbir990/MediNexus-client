@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react'
 import { Helmet } from 'react-helmet-async'
-import { FaEye } from "react-icons/fa6";
 import useAxiosCommon from '../../Hooks/useAxiosCommon/useAxiosCommon';
 import ShopMedicineRow from '../../Components/ShopMedicineRow/ShopMedicineRow';
 
@@ -15,7 +14,6 @@ export default function Shop() {
         }
     })
 
-    console.log(medicines)
     return (
         <div className='mt-10'>
             <Helmet>
