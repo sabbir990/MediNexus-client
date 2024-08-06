@@ -8,6 +8,7 @@ import SellerHomepage from "../../Components/Dasboard/Seller Statistics/SellerHo
 import Profile from "../../Components/Dasboard/Profile/Profile";
 import ManageMedicines from "../../Components/Dasboard/Manage Medicines/ManageMedicines";
 import CategoryItems from "../../Pages/Home/Categories/CategoryItems";
+import Shop from "../../Pages/Shop Page/Shop";
 
 const router = createBrowserRouter([
     {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
             {
                 path : '/category-items/:category',
                 element : <CategoryItems />
+            },
+            {
+                path : '/shop',
+                element : <Shop />
             }
         ]
     },
