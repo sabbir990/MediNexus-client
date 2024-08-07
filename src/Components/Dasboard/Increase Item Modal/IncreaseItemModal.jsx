@@ -2,25 +2,37 @@ import React from 'react'
 import useAxiosCommon from '../../../Hooks/useAxiosCommon/useAxiosCommon'
 import { useMutation } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
+import useAuth from '../../../Hooks/useAuth/useAuth';
 
 export default function IncreaseItemModal({ isOpen, setIsOpen, medicine, refetch }) {
+    const { itemName, itemGenericName, quantity, shortDescription, itemImage, itemMassUnit, category, company, perUnitPrice, discount } = medicine;
+    const {user} = useAuth();
+    const increasableItem = {
+        itemName, itemGenericName, quantity, shortDescription, itemImage, itemMassUnit, category, company, perUnitPrice, discount, userEmail : user?.email
+    }
 
     const axiosCommon = useAxiosCommon();
-    const {mutateAsync} = useMutation({
-        mutationFn : async() => {
-            const {data} = await axiosCommon.post('/cart', medicine);
+    const { mutateAsync } = useMutation({
+        mutationFn: async () => {
+            const { data } = await axiosCommon.post('/cart', increasableItem);
             return data;
         },
 
-        onSuccess : () => {
+        onSuccess: () => {
             toast.success("Quantity successfully increased!");
             setIsOpen(false)
             refetch()
         }
     })
 
-    const handleIncrease = async() => {
-        await mutateAsync()
+    const handleIncrease = async () => {
+        try {
+            await mutateAsync()
+
+        } catch (error) {
+            console.log(error.message);
+            toast.error(error.message)
+        }
     }
     return (
         <div>

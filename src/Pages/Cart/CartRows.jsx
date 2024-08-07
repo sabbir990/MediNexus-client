@@ -8,7 +8,7 @@ import DecreaseItemModal from '../../Components/Dasboard/Decrease Item Modal/Dec
 export default function CartRows({ medicine, refetch }) {
     const { itemName, itemGenericName, quantity, shortDescription, itemImage, itemMassUnit, category, company, perUnitPrice, discount } = medicine;
     const [isIncreaseOpen, setIsIncreaseOpen] = useState(false);
-    const [isDecreaseOpen, setIsDecreaseOpen] = useState(false)
+    const [isDecreaseOpen, setIsDecreaseOpen] = useState(false);
     return (
         <tr>
 
