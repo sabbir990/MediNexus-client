@@ -28,6 +28,12 @@ export default function AddToCartModal({ isOpen, setIsOpen, medicine }) {
         }
     }
 
+    if(!medicine){
+        return <div className='mt-10 flex items-center justify-center'>
+            <span className="loading loading-spinner loading-lg"></span>
+        </div>
+    }
+
     return (
         <div className="relative flex justify-center">
 
