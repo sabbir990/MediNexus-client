@@ -2,13 +2,18 @@ import React from 'react';
 import useAxiosCommon from '../../../Hooks/useAxiosCommon/useAxiosCommon';
 import { useMutation } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
+import useAuth from '../../../Hooks/useAuth/useAuth';
 
 export default function AddToCartModal({ isOpen, setIsOpen, medicine }) {
-
+    const {user} = useAuth()
+    const { itemName, itemGenericName, shortDescription, itemImage, itemMassUnit, category, company, perUnitPrice, discount, email } = medicine;
+    const seletedForCartMedicine = {
+        itemName, itemGenericName, shortDescription, itemImage, itemMassUnit, category, company, perUnitPrice, discount, userEmail : user?.email
+    }
     const axiosCommon = useAxiosCommon()
     const {mutateAsync} = useMutation({
         mutationFn : async() => {
-            const {data} = await axiosCommon.post('/cart', medicine);
+            const {data} = await axiosCommon.post('/cart', seletedForCartMedicine);
 
             return data
         },

@@ -9,6 +9,7 @@ import Profile from "../../Components/Dasboard/Profile/Profile";
 import ManageMedicines from "../../Components/Dasboard/Manage Medicines/ManageMedicines";
 import CategoryItems from "../../Pages/Home/Categories/CategoryItems";
 import Shop from "../../Pages/Shop Page/Shop";
+import CartPage from "../../Pages/Cart/CartPage";
 
 const router = createBrowserRouter([
     {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
             {
                 path : '/shop',
                 element : <Shop />
+            },
+            {
+                path : '/cart',
+                element : <CartPage />
             }
         ]
     },
