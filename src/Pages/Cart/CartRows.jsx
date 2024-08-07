@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { AiFillPlusCircle } from "react-icons/ai";
 import { AiFillMinusCircle } from "react-icons/ai";
+import IncreaseItemModal from '../../Components/Dasboard/Increase Item Modal/IncreaseItemModal';
 
 
-
-export default function CartRows({ medicine }) {
-    const { itemName, itemGenericName, shortDescription, itemImage, itemMassUnit, category, company, perUnitPrice, discount } = medicine;
+export default function CartRows({ medicine, refetch }) {
+    const { itemName, itemGenericName, quantity, shortDescription, itemImage, itemMassUnit, category, company, perUnitPrice, discount } = medicine;
+    const [isIncreaseOpen, setIsIncreaseOpen] = useState(false);
     return (
         <tr>
 
@@ -37,13 +38,15 @@ export default function CartRows({ medicine }) {
                 scope='col'
                 className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
             >
-                10
+                {quantity && quantity}
             </th>
             <th
                 scope='col'
                 className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
             >
-                <button className='btn btn-error text-white text-xl'><AiFillPlusCircle /></button>
+                <button className='btn btn-error text-white text-xl' onClick={() => setIsIncreaseOpen(true)}><AiFillPlusCircle /></button>
+
+                <IncreaseItemModal isOpen={isIncreaseOpen} setIsOpen={setIsIncreaseOpen} refetch={refetch} medicine={medicine} />
             </th>
             <th
                 scope='col'

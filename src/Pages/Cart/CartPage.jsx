@@ -15,8 +15,6 @@ export default function CartPage() {
         }
     })
 
-    console.log(cartItems)
-
     
     return (
         <div className='mt-5'>
@@ -84,7 +82,7 @@ export default function CartPage() {
                     <tbody>
                         {
                             cartItems?.map((medicine, index) => {
-                                return <CartRows key={index} medicine={medicine} />
+                                return <CartRows key={index} medicine={medicine} refetch={refetch} />
                             })
                         }
                     </tbody>
