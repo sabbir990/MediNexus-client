@@ -3,6 +3,7 @@ import { AiFillPlusCircle } from "react-icons/ai";
 import { AiFillMinusCircle } from "react-icons/ai";
 import IncreaseItemModal from '../../Components/Dasboard/Increase Item Modal/IncreaseItemModal';
 import DecreaseItemModal from '../../Components/Dasboard/Decrease Item Modal/DecreaseItemModal';
+import { NavLink } from 'react-router-dom';
 
 
 export default function CartRows({ medicine, refetch }) {
@@ -61,7 +62,7 @@ export default function CartRows({ medicine, refetch }) {
                 scope='col'
                 className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
             >
-                <button className='btn hover:bg-blue-600 text-white bg-blue-500'>Checkout</button>
+                <NavLink to={`/checkout/${medicine?.itemName}`} className='btn hover:bg-blue-600 text-white bg-blue-500'>Checkout</NavLink>
             </th>
         </tr>
     )

@@ -10,57 +10,62 @@ import ManageMedicines from "../../Components/Dasboard/Manage Medicines/ManageMe
 import CategoryItems from "../../Pages/Home/Categories/CategoryItems";
 import Shop from "../../Pages/Shop Page/Shop";
 import CartPage from "../../Pages/Cart/CartPage";
+import CheckOut from "../../Pages/Checkout/CheckOut";
 
 const router = createBrowserRouter([
     {
-        path : '/',
-        element : <Root />,
-        children : [
+        path: '/',
+        element: <Root />,
+        children: [
             {
-                path : '/',
-                element : <Home />
+                path: '/',
+                element: <Home />
             },
             {
-                path : '/category-items/:category',
-                element : <CategoryItems />
+                path: '/category-items/:category',
+                element: <CategoryItems />
             },
             {
-                path : '/shop',
-                element : <Shop />
+                path: '/shop',
+                element: <Shop />
             },
             {
-                path : '/cart',
-                element : <CartPage />
-            }
+                path: '/cart',
+                element: <CartPage />
+            },
         ]
     },
     {
-        path : '/login',
-        element : <Login />
+        path: '/checkout/:itemName',
+        element: <CheckOut />
     },
     {
-        path : '/register',
-        element : <Register />
+        path: '/login',
+        element: <Login />
     },
     {
-        path : '/dashboard',
-        element : <DashboardLayout />,
-        children : [
+        path: '/register',
+        element: <Register />
+    },
+    {
+        path: '/dashboard',
+        element: <DashboardLayout />,
+        children: [
             {
-                index : true,
-                element : <SellerHomepage />
+                index: true,
+                element: <SellerHomepage />
             },
             {
-                path : 'seller-homepage',
-                element : <SellerHomepage />
+                path: 'seller-homepage',
+                element: <SellerHomepage />
             },
             {
-                path : '/dashboard/profile',
-                element : <Profile />
+                path: '/dashboard/profile',
+                element: <Profile />
             },
             {
-                path : 'manage-medicines',
-                element : <ManageMedicines />
+                path: 'manage-medicines',
+                element: <ManageMedicines />
             },
         ]
     }
