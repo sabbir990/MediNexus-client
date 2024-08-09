@@ -26,7 +26,10 @@ export default function CheckOut() {
 
   const calculationDiscount = (!isLoading && medicine?.perUnitPrice * medicine?.discount) / 100;
   const discountedPrice = !isLoading && medicine?.perUnitPrice - calculationDiscount
+  const totalPrice = !isLoading && medicine?.quantity ? (medicine?.quantity + 1) * discountedPrice : discountedPrice;
 
+
+  console.log(totalPrice)
   
   return (
     <div className='my-10 mx-4'>
@@ -59,7 +62,7 @@ export default function CheckOut() {
         </div>
         <div className='mt-5'>
           <Elements stripe={stripePromise}>
-            <CheckoutForm medicine={medicine} discountedPrice={discountedPrice}/>
+            <CheckoutForm medicine={medicine} discountedPrice={totalPrice}/>
           </Elements>
         </div>
       </div>

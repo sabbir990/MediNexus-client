@@ -15,6 +15,8 @@ export default function CartPage() {
         }
     })
 
+    console.log(cartItems)
+
     
     return (
         <div className='mt-5'>
