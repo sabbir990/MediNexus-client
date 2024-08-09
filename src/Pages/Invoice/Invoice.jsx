@@ -5,6 +5,7 @@ import useAxiosCommon from '../../Hooks/useAxiosCommon/useAxiosCommon';
 import Logo from '../../Components/Logo/Logo';
 import { FaPrint } from "react-icons/fa6";
 import { FaDoorOpen } from "react-icons/fa";
+import downLoadPDF from './DownloadPDF';
 
 
 export default function Invoice() {
@@ -25,7 +26,7 @@ export default function Invoice() {
     const paid = !isLoading && paidInfo?.quantity ? paidInfo?.quantity * discountedPrice : discountedPrice;
 
     return (
-        <div className='py-8 font-poppins'>
+        <div className='py-8 font-poppins' id='invoice'>
             <div className='flex justify-center'>
                 <Logo />
             </div>
@@ -55,7 +56,7 @@ export default function Invoice() {
                     <p>Paid Date : {new Date(paidInfo?.date).toLocaleDateString()}(MM/DD/YYYY)</p>
                 </div>
                 <div className='flex justify-center space-x-8 mt-8'>
-                    <button className='btn btn-accent hover:btn-outline text-white'>Print <FaPrint /></button>
+                    <button onClick={downLoadPDF} className='btn btn-accent hover:btn-outline text-white'>Print <FaPrint /></button>
                     <Link to={'/'}>
                         <button className='btn btn-info hover:btn-outline text-white'>Go Home <FaDoorOpen /></button>
                     </Link>
