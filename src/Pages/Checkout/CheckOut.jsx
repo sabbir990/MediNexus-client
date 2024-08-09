@@ -26,8 +26,8 @@ export default function CheckOut() {
 
   const calculationDiscount = (!isLoading && medicine?.perUnitPrice * medicine?.discount) / 100;
   const discountedPrice = !isLoading && medicine?.perUnitPrice - calculationDiscount
+
   
-  console.log(medicine)
   return (
     <div className='my-10 mx-4'>
       <div className='flex flex-col items-center space-y-4 justify-center'>
@@ -54,7 +54,7 @@ export default function CheckOut() {
           <p>Item Mass Unit : {!isLoading && medicine && medicine?.itemMassUnit}</p>
           <p>Per Unit Price : ${!isLoading && medicine && medicine?.perUnitPrice}</p>
           <p>Discount : {!isLoading && medicine && medicine?.discount}%</p>
-          <p>Quantity : {!isLoading && medicine && medicine?.quantity + 1}</p>
+          <p>Quantity : {!isLoading && medicine && medicine?.quantity ? medicine?.quantity + 1 : 1}</p>
           <p>Discounted Price : ${discountedPrice}</p>
         </div>
         <div className='mt-5'>
