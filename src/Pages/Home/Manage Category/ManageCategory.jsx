@@ -1,13 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import useAxiosSecure from '../../../Hooks/useAxiosSecure/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import Logo from '../../../Components/Logo/Logo';
 import CategoryRows from './Category Rows/CategoryRows';
 import { GiMedicines } from "react-icons/gi"
+import AddCategoryModal from './AddcategoryModal/AddCategoryModal';
 
 export default function ManageCategory() {
+    const [isOpen, setIsOpen] = useState(false);
+
+    const handleOpen = () => setIsOpen(true);
+    const handleClose = () => setIsOpen(false);
     const iconMap = {
-        GiMedicines : GiMedicines
+        GiMedicines: GiMedicines
     }
     const axiosSecure = useAxiosSecure();
 
@@ -31,7 +36,8 @@ export default function ManageCategory() {
 
             <div className='container mx-auto px-4 sm:px-8'>
                 <div className='py-8'>
-                    <button className='btn btn-primary btn-block'>Add category</button>
+                    <button className='btn btn-primary btn-block' onClick={handleOpen}>Add category</button>
+                    <AddCategoryModal handleOpen={handleOpen} handleClose={handleClose} isOpen={isOpen} refetch={refetch} />
                     <div className='-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto'>
                         <div className='inline-block min-w-full shadow rounded-lg overflow-hidden'>
                             <table className='min-w-full leading-normal'>
