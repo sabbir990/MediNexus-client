@@ -99,6 +99,8 @@ const CheckoutForm = ({ medicine, discountedPrice }) => {
             const paymentObject = {
                 ...medicine,
                 transactionId : paymentIntent.id,
+                status : 'pending',
+                paid_total : discountedPrice,
                 date : new Date()
             }
 

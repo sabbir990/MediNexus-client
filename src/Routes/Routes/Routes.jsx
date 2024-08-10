@@ -13,6 +13,8 @@ import CartPage from "../../Pages/Cart/CartPage";
 import CheckOut from "../../Pages/Checkout/CheckOut";
 import Invoice from "../../Pages/Invoice/Invoice";
 import ManageCategory from "../../Pages/Home/Manage Category/ManageCategory";
+import ManageUsers from "../../Pages/Manage Users/ManageUsers";
+import PaymentManagement from "../../Pages/Payment Management/PaymentManagement";
 
 const router = createBrowserRouter([
     {
@@ -76,6 +78,14 @@ const router = createBrowserRouter([
             {
                 path : 'manage-category',
                 element : <ManageCategory />
+            },
+            {
+                path : 'manage-users',
+                element : <ManageUsers />
+            },
+            {
+                path : 'payment-management',
+                element : <PaymentManagement />
             }
         ]
     }
