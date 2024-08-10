@@ -2,24 +2,36 @@ import React, { useState } from 'react';
 import useAuth from '../../../Hooks/useAuth/useAuth';
 import toast from 'react-hot-toast';
 import useHostImage from '../../../Hooks/useHostImage/useHostImage';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueries, useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure/useAxiosSecure';
+import useAxiosCommon from '../../../Hooks/useAxiosCommon/useAxiosCommon';
 
 export default function AddMedicineModal({ isOpen, setIsOpen, refetch }) {
-    const {user} = useAuth();
+    const { user } = useAuth();
     const axiosSecure = useAxiosSecure()
+    const axiosCommon = useAxiosCommon();
 
-    const {mutateAsync} = useMutation({
-        mutationFn : async (product) => {
-            const {data} = await axiosSecure.post('/medicines', product);
+    const { mutateAsync } = useMutation({
+        mutationFn: async (product) => {
+            const { data } = await axiosSecure.post('/medicines', product);
             return data
         },
-        onSuccess : () => {
+        onSuccess: () => {
             setIsOpen(false)
             toast.success("Your Item Added to the shop successfully!")
         }
     })
-    
+
+    const { data: categories = [], isLoading } = useQuery({
+        queryKey: ['categories'],
+        queryFn: async () => {
+            const { data } = await axiosCommon.get('/categories');
+            return data;
+        }
+    })
+
+    console.log(categories)
+
     const handleAddMedicineSubmit = async (event) => {
         event.preventDefault();
 
@@ -36,14 +48,14 @@ export default function AddMedicineModal({ isOpen, setIsOpen, refetch }) {
         const email = user?.email;
 
 
-        try{
+        try {
             const hostedImage = await useHostImage(itemImage)
 
             const product = {
                 itemName,
                 itemGenericName,
                 shortDescription,
-                itemImage : hostedImage,
+                itemImage: hostedImage,
                 category,
                 company,
                 itemMassUnit,
@@ -55,9 +67,9 @@ export default function AddMedicineModal({ isOpen, setIsOpen, refetch }) {
             await mutateAsync(product);
 
             refetch()
-        }catch(error){
+        } catch (error) {
             console.log(error.message);
-            
+
             toast.error(error.message)
         }
     }
@@ -138,8 +150,12 @@ export default function AddMedicineModal({ isOpen, setIsOpen, refetch }) {
 
                                     <select name="category" className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40">
                                         <option value="No category selected!">Select a category</option>
-                                        <option value="Analgastics">Analgastics</option>
-                                        <option value="Antibiotics">Antibiotics</option>
+                                        {
+                                            categories?.map((category, index) => {
+                                                return <option key={index} value={category?.label}>{category?.label}</option>
+                                            })
+                                        }
+                                        {/* <option value="Antibiotics">Antibiotics</option>
                                         <option value="Antivirals">Antivirals</option>
                                         <option value="Antifungals">Antifungals</option>
                                         <option value="Antipyretics">Antipyretics</option>
@@ -156,7 +172,7 @@ export default function AddMedicineModal({ isOpen, setIsOpen, refetch }) {
                                         <option value="Immunosuppressants">Immunosuppressants</option>
                                         <option value="Laxatives">Laxatives</option>
                                         <option value="Vitamins and Supplements">Vitamins and Supplements</option>
-                                        <option value="Vaccines">Vaccines</option>
+                                        <option value="Vaccines">Vaccines</option> */}
 
                                     </select>
                                 </div>
