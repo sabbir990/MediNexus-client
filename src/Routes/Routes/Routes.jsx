@@ -12,6 +12,7 @@ import Shop from "../../Pages/Shop Page/Shop";
 import CartPage from "../../Pages/Cart/CartPage";
 import CheckOut from "../../Pages/Checkout/CheckOut";
 import Invoice from "../../Pages/Invoice/Invoice";
+import ManageCategory from "../../Pages/Home/Manage Category/ManageCategory";
 
 const router = createBrowserRouter([
     {
@@ -72,6 +73,10 @@ const router = createBrowserRouter([
                 path: 'manage-medicines',
                 element: <ManageMedicines />
             },
+            {
+                path : 'manage-category',
+                element : <ManageCategory />
+            }
         ]
     }
 ])

@@ -16,7 +16,6 @@ export default function Invoice() {
         queryKey: ['paidInfo', id],
         queryFn: async () => {
             const { data } = await axiosCommon.get(`/billing-details/${id}`);
-            console.log(data)
             return data;
         }
     })
@@ -52,6 +51,7 @@ export default function Invoice() {
                     <p>Item Mass Unit : {paidInfo?.itemMassUnit}</p>
                     <p>Discount : {paidInfo?.discount}%</p>
                     <p>Paid Price : ${paid}</p>
+                    <p>Transaction ID : {paidInfo?.transactionId}</p>
                     <p>Paid Time : {new Date(paidInfo?.date).toLocaleTimeString()}</p>
                     <p>Paid Date : {new Date(paidInfo?.date).toLocaleDateString()}(MM/DD/YYYY)</p>
                 </div>
