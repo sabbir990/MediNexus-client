@@ -45,7 +45,7 @@ export default function Invoice() {
                 <div className='mt-5 text-center'>
                     <p className='font-bold'>Item Name : {paidInfo?.itemName}</p>
                     <p>Item Generic Name : {paidInfo?.itemGenericName}</p>
-                    <p>quantity : {paidInfo?.quantity ? paidInfo?.quantity : 1}</p>
+                    <p>quantity : {paidInfo?.quantity ? paidInfo?.quantity + 1 : 1}</p>
                     <p>Company : {paidInfo?.company}</p>
                     <p>Price Per Unit : ${paidInfo?.perUnitPrice}</p>
                     <p>Item Mass Unit : {paidInfo?.itemMassUnit}</p>
@@ -56,7 +56,7 @@ export default function Invoice() {
                     <p>Paid Date : {new Date(paidInfo?.date).toLocaleDateString()}(MM/DD/YYYY)</p>
                 </div>
                 <div className='flex justify-center space-x-8 mt-8'>
-                    <button onClick={downLoadPDF} className='btn btn-accent hover:btn-outline text-white'>Print <FaPrint /></button>
+                    <button onClick={() => downLoadPDF("invoice.pdf")} className='btn btn-accent hover:btn-outline text-white'>Print <FaPrint /></button>
                     <Link to={'/'}>
                         <button className='btn btn-info hover:btn-outline text-white'>Go Home <FaDoorOpen /></button>
                     </Link>

@@ -3,14 +3,19 @@ import { useState } from 'react'
 import UpdateUserModal from './UpdateUserModal';
 import { useMutation } from '@tanstack/react-query';
 import useAxiosSecure from '../../Hooks/useAxiosSecure/useAxiosSecure';
+import toast from 'react-hot-toast';
 const UserDataRow = ({ user, refetch }) => {
     const [isOpen, setIsOpen] = useState(false);
     const axiosSecure = useAxiosSecure();
 
     const {mutateAsync} = useMutation({
         mutationFn : async(role) => {
-            const {data} = await axiosSecure.patch(`/user/${user?._id}`, role);
+            const {data} = await axiosSecure.patch(`/user/${user?._id}`, {role});
             return data;
+        },
+        onSuccess : () => {
+          toast.success("User Promoted Successfully!");
+          refetch();
         }
     })
 

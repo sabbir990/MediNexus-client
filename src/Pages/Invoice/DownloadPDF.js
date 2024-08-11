@@ -1,7 +1,7 @@
 import domtoimage from 'dom-to-image';
 import jsPDF from 'jspdf';
 
-const downloadPDF = () => {
+const downloadPDF = (fileName) => {
     const node = document.getElementById('invoice');
 
     domtoimage.toPng(node)
@@ -15,7 +15,7 @@ const downloadPDF = () => {
                 const imgHeight = (img.height * imgWidth) / img.width;
 
                 pdf.addImage(img, 'PNG', 0, 0, imgWidth, imgHeight);
-                pdf.save('invoice.pdf');
+                pdf.save(fileName);
             };
         })
         .catch((error) => {

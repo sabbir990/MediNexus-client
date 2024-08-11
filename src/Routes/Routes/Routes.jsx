@@ -15,6 +15,7 @@ import Invoice from "../../Pages/Invoice/Invoice";
 import ManageCategory from "../../Pages/Home/Manage Category/ManageCategory";
 import ManageUsers from "../../Pages/Manage Users/ManageUsers";
 import PaymentManagement from "../../Pages/Payment Management/PaymentManagement";
+import SalesReport from "../../Pages/Sales Report/SalesReport";
 
 const router = createBrowserRouter([
     {
@@ -86,6 +87,10 @@ const router = createBrowserRouter([
             {
                 path : 'payment-management',
                 element : <PaymentManagement />
+            },
+            {
+                path : "sales-report",
+                element : <SalesReport />
             }
         ]
     }

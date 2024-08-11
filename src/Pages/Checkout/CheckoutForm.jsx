@@ -106,6 +106,8 @@ const CheckoutForm = ({ medicine, discountedPrice }) => {
 
             delete paymentObject._id;
 
+            console.log(paymentObject)
+
             const savePayment = await mutateAsync(paymentObject)
 
             navigate(`/invoice/${savePayment?.insertedId}`)

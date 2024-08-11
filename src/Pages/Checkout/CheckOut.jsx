@@ -28,8 +28,7 @@ export default function CheckOut() {
   const discountedPrice = !isLoading && medicine?.perUnitPrice - calculationDiscount
   const totalPrice = !isLoading && medicine?.quantity ? (medicine?.quantity + 1) * discountedPrice : discountedPrice;
 
-
-  console.log(totalPrice)
+  console.log(selectedMedicine)
   
   return (
     <div className='my-10 mx-4'>

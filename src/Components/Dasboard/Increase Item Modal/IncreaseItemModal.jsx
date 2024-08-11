@@ -5,10 +5,10 @@ import toast from 'react-hot-toast';
 import useAuth from '../../../Hooks/useAuth/useAuth';
 
 export default function IncreaseItemModal({ isOpen, setIsOpen, medicine, refetch }) {
-    const { itemName, itemGenericName, quantity, shortDescription, itemImage, itemMassUnit, category, company, perUnitPrice, discount } = medicine;
-    const {user} = useAuth();
+    const { itemName, itemGenericName, quantity, shortDescription, itemImage, itemMassUnit, category, company, perUnitPrice, discount, buyerEmail, sellerEmail } = medicine;
+    console.log(medicine)
     const increasableItem = {
-        itemName, itemGenericName, quantity, shortDescription, itemImage, itemMassUnit, category, company, perUnitPrice, discount, userEmail : user?.email
+        itemName, itemGenericName, quantity, shortDescription, itemImage, itemMassUnit, category, company, perUnitPrice, discount, buyerEmail , sellerEmail
     }
 
     const axiosCommon = useAxiosCommon();

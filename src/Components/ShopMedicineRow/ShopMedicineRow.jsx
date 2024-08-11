@@ -54,7 +54,7 @@ export default function ShopMedicineRow({ medicine, reFetch }) {
                 className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
             >
                 <button className='btn btn-warning text-white' onClick={() => setIsopenCartModal(true)}><FaShoppingCart /></button>
-                <AddToCartModal isOpen={isOpenCartModal} setIsOpen={setIsopenCartModal} medicine={medicine} />
+                <AddToCartModal reFetch={reFetch} isOpen={isOpenCartModal} setIsOpen={setIsopenCartModal} medicine={medicine} />
             </th>
         </tr>
 

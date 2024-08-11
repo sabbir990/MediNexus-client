@@ -4,11 +4,11 @@ import { useMutation } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import useAuth from '../../../Hooks/useAuth/useAuth';
 
-export default function AddToCartModal({ isOpen, setIsOpen, medicine }) {
+export default function AddToCartModal({ isOpen, setIsOpen, medicine, reFetch }) {
     const {user} = useAuth()
     const { itemName, itemGenericName, shortDescription, itemImage, itemMassUnit, category, company, perUnitPrice, discount, email } = medicine;
     const seletedForCartMedicine = {
-        itemName, itemGenericName, shortDescription, itemImage, itemMassUnit, category, company, perUnitPrice, discount, userEmail : user?.email
+        itemName, itemGenericName, shortDescription, itemImage, itemMassUnit, category, company, perUnitPrice, discount, buyerEmail : user?.email, sellerEmail : email
     }
     const axiosCommon = useAxiosCommon()
     const {mutateAsync} = useMutation({
@@ -20,6 +20,7 @@ export default function AddToCartModal({ isOpen, setIsOpen, medicine }) {
         onSuccess : () => {
             toast.success('Your Item added to cart successfully');
             setIsOpen(false)
+            reFetch()
         }
     })
 
