@@ -4,7 +4,7 @@ import Home from "../../Pages/Home/Home";
 import Login from "../../Pages/Login/Login";
 import Register from "../../Pages/Register/Register";
 import DashboardLayout from "../../Components/Dasboard/DashboardLayout";
-import SellerHomepage from "../../Components/Dasboard/Seller Statistics/SellerHomepage";
+import SellerHomepage from "../../Pages/Seller Homepage/SellerHomepage";
 import Profile from "../../Components/Dasboard/Profile/Profile";
 import ManageMedicines from "../../Components/Dasboard/Manage Medicines/ManageMedicines";
 import CategoryItems from "../../Pages/Home/Categories/CategoryItems";

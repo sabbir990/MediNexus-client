@@ -19,7 +19,7 @@ const AdminHomepage = () => {
   })
 
   return (
-    <div>
+    <div className='font-poppins'>
       <div className='mt-12 p-4'>
         {/* small cards */}
         <div className='grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-4 mb-10'>
@@ -74,7 +74,7 @@ const AdminHomepage = () => {
         </div>
 
         <div className='w-full h-full border rounded-lg shadow-lg p-8 m-auto'>
-          <PieChart />
+          <PieChart data={paymentDetails?.categorySpecification} title={"Sales By Category"} />
         </div>
       </div>
     </div>
