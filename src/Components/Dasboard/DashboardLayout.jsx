@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom'
 import useRole from '../../Hooks/useRole/useRole'
 
 export default function DashboardLayout() {
-    const role = useRole();
+    const {role} = useRole();
     return (
         <div>
             {/* Sidebar for dashboard */}

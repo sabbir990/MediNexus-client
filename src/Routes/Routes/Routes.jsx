@@ -21,6 +21,7 @@ import AdminHomepage from "../../Pages/Admin Homepage/AdminHomepage";
 import UserHomepage from "../../Pages/User Homepage/UserHomepage";
 import UpdateProfile from "../../Pages/Update Profile/UpdateProfile";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import AdminRoute from "../AdminRoute/AdminRoute";
 
 const router = createBrowserRouter([
     {
@@ -88,7 +89,9 @@ const router = createBrowserRouter([
             {
                 index: true,
                 element: <PrivateRoute>
-                    <AdminHomepage />
+                    <AdminRoute>
+                        <AdminHomepage />
+                    </AdminRoute>
                 </PrivateRoute>
             },
             {
@@ -100,7 +103,9 @@ const router = createBrowserRouter([
             {
                 path: 'admin-homepage',
                 element: <PrivateRoute>
-                    <AdminHomepage />
+                    <AdminRoute>
+                        <AdminHomepage />
+                    </AdminRoute>
                 </PrivateRoute>
             },
             {
@@ -124,25 +129,33 @@ const router = createBrowserRouter([
             {
                 path: 'manage-category',
                 element: <PrivateRoute>
-                    <ManageCategory />
+                    <AdminRoute>
+                        <ManageCategory />
+                    </AdminRoute>
                 </PrivateRoute>
             },
             {
                 path: 'manage-users',
                 element: <PrivateRoute>
-                    <ManageUsers />
+                    <AdminRoute>
+                        <ManageUsers />
+                    </AdminRoute>
                 </PrivateRoute>
             },
             {
                 path: 'payment-management',
                 element: <PrivateRoute>
-                    <PaymentManagement />
+                    <AdminRoute>
+                        <PaymentManagement />
+                    </AdminRoute>
                 </PrivateRoute>
             },
             {
                 path: "sales-report",
                 element: <PrivateRoute>
-                    <SalesReport />
+                    <AdminRoute>
+                        <SalesReport />
+                    </AdminRoute>
                 </PrivateRoute>
             },
             {
