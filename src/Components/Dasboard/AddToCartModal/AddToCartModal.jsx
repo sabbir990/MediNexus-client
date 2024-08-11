@@ -26,6 +26,9 @@ export default function AddToCartModal({ isOpen, setIsOpen, medicine, reFetch })
 
     const handleAddToCart = async () => {
         try{
+            if(!user){
+                return toast.error("Login to save this product to cart!")
+            }
             await mutateAsync();
         }catch(error){
             console.log(error.message);

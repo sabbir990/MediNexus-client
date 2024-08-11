@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async'
 import useAuth from '../../../Hooks/useAuth/useAuth'
 import useRole from '../../../Hooks/useRole/useRole'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import toast from 'react-hot-toast'
 
 const Profile = () => {

@@ -20,6 +20,7 @@ import PaymentHistory from "../../Pages/Payment History/PaymentHistory";
 import AdminHomepage from "../../Pages/Admin Homepage/AdminHomepage";
 import UserHomepage from "../../Pages/User Homepage/UserHomepage";
 import UpdateProfile from "../../Pages/Update Profile/UpdateProfile";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 const router = createBrowserRouter([
     {
@@ -40,17 +41,23 @@ const router = createBrowserRouter([
             },
             {
                 path: '/cart',
-                element: <CartPage />
+                element: <PrivateRoute>
+                    <CartPage />
+                </PrivateRoute>
             },
         ]
     },
     {
         path: '/checkout/:itemName',
-        element: <CheckOut />
+        element: <PrivateRoute>
+            <CheckOut />
+        </PrivateRoute>
     },
     {
-        path : '/invoice/:id',
-        element : <Invoice />
+        path: '/invoice/:id',
+        element: <PrivateRoute>
+            <Invoice />
+        </PrivateRoute>
     },
     {
         path: '/login',
@@ -61,64 +68,94 @@ const router = createBrowserRouter([
         element: <Register />
     },
     {
-        path : '/updateProfile',
-        element : <UpdateProfile />
+        path: '/updateProfile',
+        element: <PrivateRoute>
+            <UpdateProfile />
+        </PrivateRoute>
     },
     {
         path: '/dashboard',
-        element: <DashboardLayout />,
+        element: <PrivateRoute>
+            <DashboardLayout />
+        </PrivateRoute>,
         children: [
             {
                 index: true,
-                element: <SellerHomepage />
+                element: <PrivateRoute>
+                    <SellerHomepage />
+                </PrivateRoute>
             },
             {
-                index : true,
-                element : <AdminHomepage />
+                index: true,
+                element: <PrivateRoute>
+                    <AdminHomepage />
+                </PrivateRoute>
             },
             {
-                index : true,
-                element : <UserHomepage />
+                index: true,
+                element: <PrivateRoute>
+                    <UserHomepage />
+                </PrivateRoute>
             },
             {
-                path : 'admin-homepage',
-                element : <AdminHomepage />
+                path: 'admin-homepage',
+                element: <PrivateRoute>
+                    <AdminHomepage />
+                </PrivateRoute>
             },
             {
                 path: 'seller-homepage',
-                element: <SellerHomepage />
+                element: <PrivateRoute>
+                    <SellerHomepage />
+                </PrivateRoute>
             },
             {
                 path: '/dashboard/profile',
-                element: <Profile />
+                element: <PrivateRoute>
+                    <Profile />
+                </PrivateRoute>
             },
             {
                 path: 'manage-medicines',
-                element: <ManageMedicines />
+                element: <PrivateRoute>
+                    <ManageMedicines />
+                </PrivateRoute>
             },
             {
-                path : 'manage-category',
-                element : <ManageCategory />
+                path: 'manage-category',
+                element: <PrivateRoute>
+                    <ManageCategory />
+                </PrivateRoute>
             },
             {
-                path : 'manage-users',
-                element : <ManageUsers />
+                path: 'manage-users',
+                element: <PrivateRoute>
+                    <ManageUsers />
+                </PrivateRoute>
             },
             {
-                path : 'payment-management',
-                element : <PaymentManagement />
+                path: 'payment-management',
+                element: <PrivateRoute>
+                    <PaymentManagement />
+                </PrivateRoute>
             },
             {
-                path : "sales-report",
-                element : <SalesReport />
+                path: "sales-report",
+                element: <PrivateRoute>
+                    <SalesReport />
+                </PrivateRoute>
             },
             {
-                path : "payment-history",
-                element : <PaymentHistory />
+                path: "payment-history",
+                element: <PrivateRoute>
+                    <PaymentHistory />
+                </PrivateRoute>
             },
             {
-                path : 'user-homepage',
-                element : <UserHomepage />
+                path: 'user-homepage',
+                element: <PrivateRoute>
+                    <UserHomepage />
+                </PrivateRoute>
             }
         ]
     }

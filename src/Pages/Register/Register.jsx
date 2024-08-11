@@ -64,7 +64,7 @@ export default function Register() {
             }
             
             toast.success('Registration successful!')
-            navigate('/')
+            location.state ? navigate(location.state) : navigate('/')
 
             const postResult = await mutateAsync(user)
 
