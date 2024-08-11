@@ -17,6 +17,7 @@ import ManageUsers from "../../Pages/Manage Users/ManageUsers";
 import PaymentManagement from "../../Pages/Payment Management/PaymentManagement";
 import SalesReport from "../../Pages/Sales Report/SalesReport";
 import PaymentHistory from "../../Pages/Payment History/PaymentHistory";
+import AdminHomepage from "../../Pages/Admin Homepage/AdminHomepage";
 
 const router = createBrowserRouter([
     {
@@ -64,6 +65,14 @@ const router = createBrowserRouter([
             {
                 index: true,
                 element: <SellerHomepage />
+            },
+            {
+                index : true,
+                element : <AdminHomepage />
+            },
+            {
+                path : 'admin-homepage',
+                element : <AdminHomepage />
             },
             {
                 path: 'seller-homepage',
