@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { FaCartShopping } from "react-icons/fa6";
 import Logo from "../Logo/Logo";
 import toast from "react-hot-toast";
@@ -116,10 +116,10 @@ const NavBar = () => {
                                 className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
                                 <li><p className="text-center font-bold">{user && user.displayName && user.displayName}</p></li>
                                 <li>
-                                    <a className="justify-between">
+                                    <Link to={"/updateProfile"} className="justify-between">
                                         Update Profile
                                         <span className="badge">New</span>
-                                    </a>
+                                    </Link>
                                 </li>
                                 <li><NavLink to={'/dashboard'}>Dashboard</NavLink></li>
                                 <li><button onClick={ logOutUser}>Logout</button></li>

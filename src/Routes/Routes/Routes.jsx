@@ -19,6 +19,7 @@ import SalesReport from "../../Pages/Sales Report/SalesReport";
 import PaymentHistory from "../../Pages/Payment History/PaymentHistory";
 import AdminHomepage from "../../Pages/Admin Homepage/AdminHomepage";
 import UserHomepage from "../../Pages/User Homepage/UserHomepage";
+import UpdateProfile from "../../Pages/Update Profile/UpdateProfile";
 
 const router = createBrowserRouter([
     {
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
     {
         path: '/register',
         element: <Register />
+    },
+    {
+        path : '/updateProfile',
+        element : <UpdateProfile />
     },
     {
         path: '/dashboard',

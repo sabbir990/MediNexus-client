@@ -1,6 +1,7 @@
 import { Helmet } from 'react-helmet-async'
 import useAuth from '../../../Hooks/useAuth/useAuth'
 import useRole from '../../../Hooks/useRole/useRole'
+import { NavLink } from 'react-router-dom'
 
 const Profile = () => {
     const { user } = useAuth()
@@ -46,9 +47,9 @@ const Profile = () => {
                             </p>
 
                             <div>
-                                <button className='bg-blue-500 px-10 py-1 rounded-lg text-white cursor-pointer hover:bg-blue-700 block mb-1'>
+                                <NavLink to={'/updateProfile'} className='bg-blue-500 px-10 py-1 rounded-lg text-white cursor-pointer hover:bg-blue-700 block mb-1'>
                                     Update Profile
-                                </button>
+                                </NavLink>
                                 <button className='bg-blue-500 px-7 py-1 rounded-lg text-white cursor-pointer hover:bg-blue-700'>
                                     Change Password
                                 </button>

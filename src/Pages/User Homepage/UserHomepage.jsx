@@ -18,7 +18,7 @@ export default function UserHomepage() {
         }
     })
 
-    console.log(payments)
+    
     return (
         <div>
             <Helmet>
