@@ -1,9 +1,9 @@
 import React from 'react'
-import useAuth from '../../Hooks/useAuth/useAuth'
+import useAuth from '../../Hooks/useAuth/useAuth';
 import useRole from '../../Hooks/useRole/useRole';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-export default function AdminRoute({ children }) {
+export default function SellerRoute({children}) {
     const {logOut} = useAuth()
     const {role, isLoading} = useRole();
     const location = useLocation();
@@ -15,7 +15,7 @@ export default function AdminRoute({ children }) {
         </div>
     }
 
-    if(role !== 'admin'){
+    if(role !== 'seller'){
         logOut();
         navigate('/login', {
             state : location.pathname

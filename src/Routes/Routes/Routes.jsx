@@ -22,6 +22,8 @@ import UserHomepage from "../../Pages/User Homepage/UserHomepage";
 import UpdateProfile from "../../Pages/Update Profile/UpdateProfile";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import AdminRoute from "../AdminRoute/AdminRoute";
+import SellerRoute from "../SellerRoute/SellerRoute";
+import RandomRoute from "../RandomRoute/RandomRoute";
 
 const router = createBrowserRouter([
     {
@@ -83,21 +85,7 @@ const router = createBrowserRouter([
             {
                 index: true,
                 element: <PrivateRoute>
-                    <SellerHomepage />
-                </PrivateRoute>
-            },
-            {
-                index: true,
-                element: <PrivateRoute>
-                    <AdminRoute>
-                        <AdminHomepage />
-                    </AdminRoute>
-                </PrivateRoute>
-            },
-            {
-                index: true,
-                element: <PrivateRoute>
-                    <UserHomepage />
+                    <RandomRoute />
                 </PrivateRoute>
             },
             {
@@ -111,7 +99,9 @@ const router = createBrowserRouter([
             {
                 path: 'seller-homepage',
                 element: <PrivateRoute>
-                    <SellerHomepage />
+                    <SellerRoute>
+                        <SellerHomepage />
+                    </SellerRoute>
                 </PrivateRoute>
             },
             {
@@ -123,7 +113,9 @@ const router = createBrowserRouter([
             {
                 path: 'manage-medicines',
                 element: <PrivateRoute>
-                    <ManageMedicines />
+                    <SellerRoute>
+                        <ManageMedicines />
+                    </SellerRoute>
                 </PrivateRoute>
             },
             {
@@ -161,7 +153,9 @@ const router = createBrowserRouter([
             {
                 path: "payment-history",
                 element: <PrivateRoute>
-                    <PaymentHistory />
+                    <SellerRoute>
+                        <PaymentHistory />
+                    </SellerRoute>
                 </PrivateRoute>
             },
             {
