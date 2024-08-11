@@ -16,6 +16,7 @@ import ManageCategory from "../../Pages/Home/Manage Category/ManageCategory";
 import ManageUsers from "../../Pages/Manage Users/ManageUsers";
 import PaymentManagement from "../../Pages/Payment Management/PaymentManagement";
 import SalesReport from "../../Pages/Sales Report/SalesReport";
+import PaymentHistory from "../../Pages/Payment History/PaymentHistory";
 
 const router = createBrowserRouter([
     {
@@ -91,6 +92,10 @@ const router = createBrowserRouter([
             {
                 path : "sales-report",
                 element : <SalesReport />
+            },
+            {
+                path : "payment-history",
+                element : <PaymentHistory />
             }
         ]
     }
