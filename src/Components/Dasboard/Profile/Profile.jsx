@@ -1,12 +1,22 @@
 import { Helmet } from 'react-helmet-async'
 import useAuth from '../../../Hooks/useAuth/useAuth'
 import useRole from '../../../Hooks/useRole/useRole'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
+import toast from 'react-hot-toast'
 
 const Profile = () => {
-    const { user } = useAuth()
+    const { user, resetPassword } = useAuth()
     const role = useRole()
 
+    const handleResetPassword = async () => {
+        try{
+            await resetPassword(user?.email);
+            toast.success("We've sent an email to you! Please check your emails")
+        }catch(error){
+            console.log(error);
+            toast.error(error.message)
+        }
+    }
     return (
         <div className='flex justify-center items-center h-screen'>
             <Helmet>
@@ -50,7 +60,7 @@ const Profile = () => {
                                 <NavLink to={'/updateProfile'} className='bg-blue-500 px-10 py-1 rounded-lg text-white cursor-pointer hover:bg-blue-700 block mb-1'>
                                     Update Profile
                                 </NavLink>
-                                <button className='bg-blue-500 px-7 py-1 rounded-lg text-white cursor-pointer hover:bg-blue-700'>
+                                <button onClick={handleResetPassword} className='bg-blue-500 px-7 py-1 rounded-lg text-white cursor-pointer hover:bg-blue-700'>
                                     Change Password
                                 </button>
                             </div>

@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import React from 'react'
 import auth from "../../Firebase/Firebase.config";
-import { GithubAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
+import { GithubAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { useMutation } from "@tanstack/react-query";
 import useAxiosCommon from "../../Hooks/useAxiosCommon/useAxiosCommon";
 
@@ -55,6 +55,11 @@ export default function AuthProvider({children}) {
         return signOut(auth);
     }
 
+    const resetPassword = (email) => {
+        setLoading(true);
+        return sendPasswordResetEmail(auth, email);
+    }
+
     const saveUser = async(currentUser) => {
         const createdUser = {
             email : currentUser?.email,
@@ -94,7 +99,8 @@ export default function AuthProvider({children}) {
         logOut,
         loading,
         setLoading,
-        saveUser
+        saveUser,
+        resetPassword
     }
   return (
     <AuthContext.Provider value={authObject}>
