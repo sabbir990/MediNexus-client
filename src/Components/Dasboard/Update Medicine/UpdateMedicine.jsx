@@ -61,7 +61,7 @@ export default function UpdateMedicine({ isOpen, setIsOpen, _id}) {
             }
 
             const patchingResult = await mutateAsync(updatedMedicine)
-            console.log(patchingResult)
+
 
         }catch(error){
             console.log(error.message)

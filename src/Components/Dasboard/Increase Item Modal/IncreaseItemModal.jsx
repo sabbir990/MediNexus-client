@@ -6,7 +6,7 @@ import useAuth from '../../../Hooks/useAuth/useAuth';
 
 export default function IncreaseItemModal({ isOpen, setIsOpen, medicine, refetch }) {
     const { itemName, itemGenericName, quantity, shortDescription, itemImage, itemMassUnit, category, company, perUnitPrice, discount, buyerEmail, sellerEmail } = medicine;
-    console.log(medicine)
+    
     const increasableItem = {
         itemName, itemGenericName, quantity, shortDescription, itemImage, itemMassUnit, category, company, perUnitPrice, discount, buyerEmail , sellerEmail
     }

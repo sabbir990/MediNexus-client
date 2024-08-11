@@ -18,6 +18,7 @@ import PaymentManagement from "../../Pages/Payment Management/PaymentManagement"
 import SalesReport from "../../Pages/Sales Report/SalesReport";
 import PaymentHistory from "../../Pages/Payment History/PaymentHistory";
 import AdminHomepage from "../../Pages/Admin Homepage/AdminHomepage";
+import UserHomepage from "../../Pages/User Homepage/UserHomepage";
 
 const router = createBrowserRouter([
     {
@@ -71,6 +72,10 @@ const router = createBrowserRouter([
                 element : <AdminHomepage />
             },
             {
+                index : true,
+                element : <UserHomepage />
+            },
+            {
                 path : 'admin-homepage',
                 element : <AdminHomepage />
             },
@@ -105,6 +110,10 @@ const router = createBrowserRouter([
             {
                 path : "payment-history",
                 element : <PaymentHistory />
+            },
+            {
+                path : 'user-homepage',
+                element : <UserHomepage />
             }
         ]
     }

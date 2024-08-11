@@ -16,7 +16,6 @@ export default function PaymentManagement() {
         }
     })
     
-    console.log(payments);
     return (
         <>
             <Helmet>

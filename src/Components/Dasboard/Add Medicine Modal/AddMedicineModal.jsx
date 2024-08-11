@@ -30,7 +30,6 @@ export default function AddMedicineModal({ isOpen, setIsOpen, refetch }) {
         }
     })
 
-    console.log(categories)
 
     const handleAddMedicineSubmit = async (event) => {
         event.preventDefault();

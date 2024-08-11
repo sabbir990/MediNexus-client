@@ -1,43 +1,41 @@
+import React from 'react'
 import { Helmet } from 'react-helmet-async'
-import useAuth from '../../../Hooks/useAuth/useAuth'
-import AddMedicineModal from '../Add Medicine Modal/AddMedicineModal';
-import { useState } from 'react';
+import Logo from '../../Components/Logo/Logo'
+import useAxiosCommon from '../../Hooks/useAxiosCommon/useAxiosCommon'
 import { useQuery } from '@tanstack/react-query';
-import useAxiosSecure from '../../../Hooks/useAxiosSecure/useAxiosSecure';
-import MedicineRows from '../Medicine Rows/MedicineRows';
+import useAuth from '../../Hooks/useAuth/useAuth';
+import UserHomepageRow from './UserHomepageRow';
 
-const ManageMedicines = () => {
-    const { user } = useAuth();
-    const [isOpen, setIsOpen] = useState(false)
-    const axiosSecure = useAxiosSecure();
+export default function UserHomepage() {
+    const {user} = useAuth()
+    const axiosCommon = useAxiosCommon();
 
-    const { data: medicines = [], isLoading, refetch } = useQuery({
-        queryKey: ['medicines', user?.email],
-        queryFn: async () => {
-            const { data } = await axiosSecure.get(`/medicines/${user?.email}`);
+    const {data : payments = []} = useQuery({
+        queryKey : ['payment-user'],
+        queryFn : async() => {
+            const {data} = await axiosCommon.get(`/dashboard-user/${user?.email}`);
             return data;
         }
     })
 
-
-    const handleIsOpen = () => {
-        setIsOpen(true)
-    }
+    console.log(payments)
     return (
-        <>
+        <div>
             <Helmet>
-                <title>Manage Medicines</title>
+                <title>Payment History</title>
             </Helmet>
+            <div className='flex flex-col items-center mt-8'>
+                <Logo />
+                <div className='text-center mt-4 font-poppins'>
+                    <h1 className='font-bold text-2xl'>Payment History</h1>
+                    <p className='text-gray-500'>Track Your Transactions and Payment Details in Medinexus</p>
+                </div>
+            </div>
+
 
             <div className='container mx-auto px-4 sm:px-8'>
-                <div>
-                    <h1 className='flex items-center justify-center space-x-2 text-center text-3xl mt-20'><p>Manage Your Medicines</p> <p className='font-lijeva'>{user?.displayName}</p></h1>
-                </div>
                 <div className='py-8'>
-                    <div className='-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto space-y-4'>
-                        <div>
-                            <button className='btn btn-block btn-primary' onClick={handleIsOpen}>Add Medicine</button>
-                        </div>
+                    <div className='-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto'>
                         <div className='inline-block min-w-full shadow rounded-lg overflow-hidden'>
                             <table className='min-w-full leading-normal'>
                                 <thead>
@@ -46,51 +44,44 @@ const ManageMedicines = () => {
                                             scope='col'
                                             className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
                                         >
-                                            Item Image
+                                            Medicine Name
                                         </th>
                                         <th
                                             scope='col'
                                             className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
                                         >
-                                            Item Name
+                                            Seller
                                         </th>
                                         <th
                                             scope='col'
                                             className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
                                         >
-                                            Item Category
+                                            Transaction
                                         </th>
                                         <th
                                             scope='col'
                                             className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
                                         >
-                                            Company
+                                            Transaction Date
                                         </th>
                                         <th
                                             scope='col'
                                             className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
                                         >
-                                            Item Mass (MG)
+                                            Transaction Time
                                         </th>
                                         <th
                                             scope='col'
                                             className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
                                         >
-                                            Delete
-                                        </th>
-                                        <th
-                                            scope='col'
-                                            className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
-                                        >
-                                            Update
+                                            Quantity
                                         </th>
                                     </tr>
                                 </thead>
-                                <AddMedicineModal refetch={refetch} isOpen={isOpen} setIsOpen={setIsOpen} />
                                 <tbody>
                                     {
-                                        medicines?.map((medicine, index) => {
-                                            return <MedicineRows key={medicine?._id} medicine={medicine} reFetch={refetch}/>
+                                        payments?.map((payment, index) => {
+                                            return <UserHomepageRow payment={payment} key={index} />
                                         })
                                     }
                                 </tbody>
@@ -99,8 +90,6 @@ const ManageMedicines = () => {
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
-
-export default ManageMedicines
