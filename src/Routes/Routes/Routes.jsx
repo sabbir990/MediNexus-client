@@ -24,6 +24,7 @@ import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import AdminRoute from "../AdminRoute/AdminRoute";
 import SellerRoute from "../SellerRoute/SellerRoute";
 import RandomRoute from "../RandomRoute/RandomRoute";
+import UserRoute from "../UserRoute/UserRoute";
 
 const router = createBrowserRouter([
     {
@@ -161,7 +162,9 @@ const router = createBrowserRouter([
             {
                 path: 'user-homepage',
                 element: <PrivateRoute>
-                    <UserHomepage />
+                    <UserRoute>
+                        <UserHomepage />
+                    </UserRoute>
                 </PrivateRoute>
             }
         ]

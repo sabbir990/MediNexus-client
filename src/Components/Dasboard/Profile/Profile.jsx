@@ -6,7 +6,7 @@ import toast from 'react-hot-toast'
 
 const Profile = () => {
     const { user, resetPassword } = useAuth()
-    const role = useRole()
+    const {role} = useRole()
 
     const handleResetPassword = async () => {
         try{
