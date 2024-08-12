@@ -3,9 +3,11 @@ import Logo from '../../Components/Logo/Logo'
 import useAxiosSecure from '../../Hooks/useAxiosSecure/useAxiosSecure'
 import { useQuery } from '@tanstack/react-query';
 import UserDataRow from './UsersRow';
+import useAuth from '../../Hooks/useAuth/useAuth';
 
 const ManageUsers = () => {
     const axiosSecure = useAxiosSecure();
+    const {user} = useAuth();
 
     const { data: users = [], isLoading, refetch } = useQuery({
         queryKey: ['users'],
@@ -66,7 +68,7 @@ const ManageUsers = () => {
                                 </thead>
                                 <tbody>{/* User data table row */}
                                     {
-                                        users?.map((user, index) => {
+                                        users.filter(admin => admin?.email !== user?.email).map((user, index) => {
                                             return <UserDataRow key={index} user={user} refetch={refetch} />
                                         })
                                     }

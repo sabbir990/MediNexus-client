@@ -18,7 +18,7 @@ export default function DiscountProducts() {
 
     const discountedMedicines = medicines.filter(medicine => medicine.discount > 0);
 
-    if(isLoading){
+    if (isLoading) {
         return <div className='flex items-center justify-center mt-28'>
             <span className="loading loading-spinner loading-lg"></span>
         </div>
@@ -46,7 +46,7 @@ export default function DiscountProducts() {
                     >
                         {discountedMedicines.map((medicine, index) => (
                             <SwiperSlide key={index}>
-                                <div className="card card-side bg-base-100 h-full">
+                                <div className="flex bg-white shadow-lg rounded-lg overflow-hidden h-full">
                                     <figure className="w-1/3">
                                         <img
                                             src={medicine?.itemImage}
@@ -54,18 +54,32 @@ export default function DiscountProducts() {
                                             className="h-full w-full object-cover"
                                         />
                                     </figure>
-                                    <div className="card-body font-lijeva rounded-r-xl bg-slate-200">
-                                        <h2 className="card-title">{medicine?.itemName}</h2>
-                                        <div className='w-[100px] h-[2px] bg-blue-500'></div>
-                                        <p className='font-bold'>Generic Name : {medicine?.itemGenericName}</p>
-                                        <p>Description : {medicine?.shortDescription}</p>
-                                        <p>Category : {medicine?.category}</p>
-                                        <p>Company : {medicine?.company}</p>
-                                        <p>Price : ${medicine?.perUnitPrice}</p>
-                                        <p>Discount: {medicine?.discount}%</p>
+
+                                    <div className="flex flex-col justify-between p-6 w-2/3 bg-gradient-to-r from-blue-100 to-blue-50">
+                                        <div>
+                                            <h2 className="text-3xl font-bold text-gray-800">{medicine?.itemName}</h2>
+                                            <div className='w-16 h-[3px] bg-blue-500 mt-2 mb-4'></div>
+                                            <p className="text-lg text-gray-600 italic">Generic Name: {medicine?.itemGenericName}</p>
+                                        </div>
+
+                                        <div className="text-gray-700 mt-4">
+                                            <p className="mb-2"><span className="font-semibold">Description:</span> {medicine?.shortDescription}</p>
+                                            <p className="mb-2"><span className="font-semibold">Category:</span> {medicine?.category}</p>
+                                            <p className="mb-2"><span className="font-semibold">Company:</span> {medicine?.company}</p>
+                                        </div>
+
+                                        <div className="mt-4">
+                                            <p className="text-xl font-semibold text-blue-600">Price Per Unit ${medicine?.perUnitPrice}</p>
+                                            {medicine?.discount > 0 && (
+                                                <p className="inline-block mt-2 px-3 py-1 text-sm font-semibold text-red-600 bg-red-100 rounded">
+                                                    {medicine?.discount}% OFF
+                                                </p>
+                                            )}
+                                        </div>
                                     </div>
                                 </div>
                             </SwiperSlide>
+
                         ))}
                     </Swiper>
                 ) : (
