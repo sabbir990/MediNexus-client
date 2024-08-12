@@ -25,6 +25,7 @@ import AdminRoute from "../AdminRoute/AdminRoute";
 import SellerRoute from "../SellerRoute/SellerRoute";
 import RandomRoute from "../RandomRoute/RandomRoute";
 import UserRoute from "../UserRoute/UserRoute";
+import AskForAdvertisement from "../../Pages/AskForAdvertisement/AskForAdvertisement";
 
 const router = createBrowserRouter([
     {
@@ -165,6 +166,14 @@ const router = createBrowserRouter([
                     <UserRoute>
                         <UserHomepage />
                     </UserRoute>
+                </PrivateRoute>
+            },
+            {
+                path : 'ask-for-advertisement',
+                element : <PrivateRoute>
+                    <SellerRoute>
+                        <AskForAdvertisement />
+                    </SellerRoute>
                 </PrivateRoute>
             }
         ]

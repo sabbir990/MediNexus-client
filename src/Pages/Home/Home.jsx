@@ -4,6 +4,7 @@ import DiscountProducts from '../../Components/Discount Products section/Discoun
 import WhyChooseUs from '../../Components/Why choose us Section/WhyChooseUs'
 import NewsLetter from '../../Components/NewsLetter/NewsLetter'
 import { Helmet } from 'react-helmet-async'
+import AdvertisementBanner from './Advertisement Banner/AdvertisementBanner'
 
 export default function Home() {
   return (
@@ -11,6 +12,9 @@ export default function Home() {
       <Helmet>
         <title>Home</title>
       </Helmet>
+      <div>
+        <AdvertisementBanner />
+      </div>
       <div>
         <Categories />
       </div>

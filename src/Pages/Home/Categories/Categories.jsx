@@ -6,28 +6,29 @@ import { useQuery } from '@tanstack/react-query'
 
 
 export default function Categories() {
-    const iconMap = {
-        GiMedicines : GiMedicines
-    }
     const axiosCommon = useAxiosCommon();
 
-    const {data : categories = [], isLoading, refetch} = useQuery({
-        queryKey : ['categories'],
-        queryFn : async() => {
-            const {data} = await axiosCommon.get("/categories");
+    const { data: categories = [], isLoading, refetch } = useQuery({
+        queryKey: ['categories'],
+        queryFn: async () => {
+            const { data } = await axiosCommon.get("/categories");
             return data;
         }
     })
 
     return (
-        <div className='mt-28'>
-            <h1 className='text-center font-bold font-roboto text-3xl mb-6'>Medicine Categories</h1>
-            <div className='pt-4 gap-4 grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-2 overflow-x-auto'>
-                {
-                    categories && categories.map((category, index) => {
-                        return <CategoryBox key={index} label={category?.label} icon={GiMedicines} />
-                    })
-                }
+        <div className='mt-28 font-poppins'>
+            <h1 className='text-center font-bold font-poppins text-3xl mb-6'>Categories</h1>
+            <p className='text-center font-bold font-poppins text-gray-500 mb-6'>Explore Our Wide Range of Categories</p>
+            <div className='w-36 h-1 m-auto rounded-lg bg-blue-500'>
+
+            </div>
+            <div className="pt-4 gap-4 flex overflow-x-auto">
+                {categories && categories.map((category, index) => (
+                    <div key={index} className="min-w-[calc(25%-1rem)] flex-shrink-0">
+                        <CategoryBox label={category?.label} icon={GiMedicines} />
+                    </div>
+                ))}
             </div>
         </div>
     )
