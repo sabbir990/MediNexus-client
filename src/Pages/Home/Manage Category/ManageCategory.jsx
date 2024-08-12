@@ -5,6 +5,7 @@ import Logo from '../../../Components/Logo/Logo';
 import CategoryRows from './Category Rows/CategoryRows';
 import { GiMedicines } from "react-icons/gi"
 import AddCategoryModal from './AddcategoryModal/AddCategoryModal';
+import { Helmet } from 'react-helmet-async';
 
 export default function ManageCategory() {
     const [isOpen, setIsOpen] = useState(false);
@@ -26,6 +27,9 @@ export default function ManageCategory() {
 
     return (
         <div>
+            <Helmet>
+                <title>Manage Category</title>
+            </Helmet>
             <div className='flex flex-col items-center mt-8'>
                 <Logo />
                 <div className='text-center mt-4 font-poppins'>

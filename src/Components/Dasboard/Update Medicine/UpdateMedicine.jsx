@@ -20,7 +20,7 @@ export default function UpdateMedicine({ isOpen, setIsOpen, _id}) {
 
     const {mutateAsync} = useMutation({
         mutationFn : async(updatedMedicine) => {
-            const {data} = await axiosSecure.patch(`/medicine`, updatedMedicine);
+            const {data} = await axiosSecure.patch(`/medicine/${_id}`, updatedMedicine);
             return data;
         },
         onSuccess : () => {

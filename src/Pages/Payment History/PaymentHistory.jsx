@@ -18,7 +18,6 @@ export default function PaymentHistory() {
         }
     })
 
-    console.log(payments)
     return (
         <div>
             <div className='container mx-auto px-4 sm:px-8'>

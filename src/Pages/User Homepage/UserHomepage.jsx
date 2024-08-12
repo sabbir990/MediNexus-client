@@ -1,19 +1,19 @@
 import React from 'react'
 import { Helmet } from 'react-helmet-async'
 import Logo from '../../Components/Logo/Logo'
-import useAxiosCommon from '../../Hooks/useAxiosCommon/useAxiosCommon'
 import { useQuery } from '@tanstack/react-query';
 import useAuth from '../../Hooks/useAuth/useAuth';
 import UserHomepageRow from './UserHomepageRow';
+import useAxiosSecure from '../../Hooks/useAxiosSecure/useAxiosSecure';
 
 export default function UserHomepage() {
     const {user} = useAuth()
-    const axiosCommon = useAxiosCommon();
+    const axiosSecure = useAxiosSecure();
 
     const {data : payments = []} = useQuery({
         queryKey : ['payment-user'],
         queryFn : async() => {
-            const {data} = await axiosCommon.get(`/dashboard-user/${user?.email}`);
+            const {data} = await axiosSecure.get(`/dashboard-user/${user?.email}`);
             return data;
         }
     })

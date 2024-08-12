@@ -1,13 +1,13 @@
 import React from 'react'
-import useAxiosCommon from '../../../Hooks/useAxiosCommon/useAxiosCommon'
 import { useMutation } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
+import useAxiosSecure from '../../../Hooks/useAxiosSecure/useAxiosSecure';
 
 export default function DecreaseItemModal({ isOpen, setIsOpen, medicine, refetch }) {
-    const axiosCommon = useAxiosCommon();
+    const axiosSecure = useAxiosSecure();
     const {mutateAsync} = useMutation({
         mutationFn : async() => {
-            const {data} = await axiosCommon.delete(`/cart/${medicine?.itemName}`);
+            const {data} = await axiosSecure.delete(`/cart/${medicine?.itemName}`);
             return data
         },
 

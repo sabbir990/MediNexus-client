@@ -1,21 +1,22 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react'
 import { Link, useParams } from 'react-router-dom'
-import useAxiosCommon from '../../Hooks/useAxiosCommon/useAxiosCommon';
 import Logo from '../../Components/Logo/Logo';
 import { FaPrint } from "react-icons/fa6";
 import { FaDoorOpen } from "react-icons/fa";
 import downLoadPDF from './DownloadPDF';
+import useAxiosSecure from '../../Hooks/useAxiosSecure/useAxiosSecure';
+import { Helmet } from 'react-helmet-async';
 
 
 export default function Invoice() {
     const { id } = useParams();
-    const axiosCommon = useAxiosCommon();
+    const axiosSecure = useAxiosSecure();
 
     const { data: paidInfo, isLoading, refetch } = useQuery({
         queryKey: ['paidInfo', id],
         queryFn: async () => {
-            const { data } = await axiosCommon.get(`/billing-details/${id}`);
+            const { data } = await axiosSecure.get(`/billing-details/${id}`);
             return data;
         }
     })
@@ -26,6 +27,10 @@ export default function Invoice() {
 
     return (
         <div className='py-8 font-poppins' id='invoice'>
+
+            <Helmet>
+                <title>Invoice</title>
+            </Helmet>
             <div className='flex justify-center'>
                 <Logo />
             </div>

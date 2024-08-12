@@ -1,8 +1,7 @@
 import React from 'react'
-import useAxiosCommon from '../../../Hooks/useAxiosCommon/useAxiosCommon'
 import { useMutation } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
-import useAuth from '../../../Hooks/useAuth/useAuth';
+import useAxiosSecure from '../../../Hooks/useAxiosSecure/useAxiosSecure';
 
 export default function IncreaseItemModal({ isOpen, setIsOpen, medicine, refetch }) {
     const { itemName, itemGenericName, quantity, shortDescription, itemImage, itemMassUnit, category, company, perUnitPrice, discount, buyerEmail, sellerEmail } = medicine;
@@ -11,10 +10,10 @@ export default function IncreaseItemModal({ isOpen, setIsOpen, medicine, refetch
         itemName, itemGenericName, quantity, shortDescription, itemImage, itemMassUnit, category, company, perUnitPrice, discount, buyerEmail , sellerEmail
     }
 
-    const axiosCommon = useAxiosCommon();
+    const axiosSecure = useAxiosSecure();
     const { mutateAsync } = useMutation({
         mutationFn: async () => {
-            const { data } = await axiosCommon.post('/cart', increasableItem);
+            const { data } = await axiosSecure.post('/cart', increasableItem);
             return data;
         },
 

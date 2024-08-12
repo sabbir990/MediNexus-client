@@ -1,4 +1,3 @@
-import { format } from 'date-fns'
 import PropTypes from 'prop-types'
 
 const SalesReportRow = ({ payment }) => {
@@ -39,7 +38,7 @@ const SalesReportRow = ({ payment }) => {
       </td>
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
         <p className='text-gray-900 whitespace-no-wrap'>
-          {format(new Date(payment?.date), 'P')}
+          {new Date(payment?.date).toLocaleDateString()}
         </p>
       </td>
       {/* <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>

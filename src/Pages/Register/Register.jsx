@@ -6,18 +6,19 @@ import toast from 'react-hot-toast';
 import useHostImage from '../../Hooks/useHostImage/useHostImage';
 import { FaSpinner } from "react-icons/fa"
 import { useMutation } from '@tanstack/react-query';
-import useAxiosCommon from '../../Hooks/useAxiosCommon/useAxiosCommon';
+import useAxiosSecure from '../../Hooks/useAxiosSecure/useAxiosSecure';
+import { Helmet } from 'react-helmet-async';
 
 
 export default function Register() {
     const { loading, setLoading, createUser, updateUserProfile } = useAuth();
     const location = useLocation();
     const navigate = useNavigate();
-    const axiosCommon = useAxiosCommon()
+    const axiosSecure = useAxiosSecure()
 
     const {mutateAsync} = useMutation({
         mutationFn : async (user) => {
-            const {data} = await axiosCommon.put('/user', user)
+            const {data} = await axiosSecure.put('/user', user)
             return data
         }
     })
@@ -84,6 +85,9 @@ export default function Register() {
 
     return (
         <div className='py-12 flex items-center justify-center'>
+            <Helmet>
+                <title>Register</title>
+            </Helmet>
             <section className="bg-white dark:bg-gray-900">
                 <div className="container flex items-center justify-center min-h-screen px-6 mx-auto">
                     <form className="w-full max-w-md" onSubmit={handleRegisterUser}>

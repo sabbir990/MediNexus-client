@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import useAuth from '../../Hooks/useAuth/useAuth'
 import toast from 'react-hot-toast'
 import { FaSpinner } from 'react-icons/fa'
+import { Helmet } from 'react-helmet-async'
 
 export default function Login() {
     const {signIn, googleSignIn, githubSignIn, loading, setLoading, saveUser} = useAuth();
@@ -73,6 +74,9 @@ export default function Login() {
     }
     return (
         <div className='py-12 flex items-center justify-center'>
+            <Helmet>
+                <title>Login</title>
+            </Helmet>
 
             <div className="w-full px-6 py-8 md:px-8 lg:w-1/2">
                 <div className="flex justify-center mx-auto">

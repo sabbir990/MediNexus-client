@@ -3,18 +3,18 @@ import { CardElement, PaymentElement, useElements, useStripe } from "@stripe/rea
 import { GiExitDoor } from "react-icons/gi";
 import './Checkout.css';
 import { Link, useNavigate } from 'react-router-dom';
-import useAxiosCommon from '../../Hooks/useAxiosCommon/useAxiosCommon';
 import { ImSpinner9 } from "react-icons/im";
 import useAuth from '../../Hooks/useAuth/useAuth';
 import toast from 'react-hot-toast';
 import { useMutation } from '@tanstack/react-query';
+import useAxiosSecure from '../../Hooks/useAxiosSecure/useAxiosSecure';
 
 
 const CheckoutForm = ({ medicine, discountedPrice }) => {
     const {user} = useAuth()
     const stripe = useStripe();
     const elements = useElements();
-    const axiosCommon = useAxiosCommon()
+    const axiosSecure = useAxiosSecure()
     const [processing, setProcessing] = useState(false)
     const navigate = useNavigate()
     const [clientSecret, setClientSecret] = useState();
@@ -25,7 +25,7 @@ const CheckoutForm = ({ medicine, discountedPrice }) => {
 
     const generateClientSecret = async() => {
         try{
-            const {data} = await axiosCommon.post('/create-payment-intent', {discountedPrice})
+            const {data} = await axiosSecure.post('/create-payment-intent', {discountedPrice})
             setClientSecret(data)
         }catch(error){
             console.log(error);
@@ -35,7 +35,7 @@ const CheckoutForm = ({ medicine, discountedPrice }) => {
 
     const {mutateAsync} = useMutation({
         mutationFn : async(paymentDetails) => {
-            const {data} = await axiosCommon.post('/billing', paymentDetails);
+            const {data} = await axiosSecure.post('/billing', paymentDetails);
             return data;
         },
 

@@ -1,20 +1,19 @@
 import { useQuery } from '@tanstack/react-query'
 import React from 'react'
-import useAxiosCommon from '../../Hooks/useAxiosCommon/useAxiosCommon'
 import useAuth from '../../Hooks/useAuth/useAuth'
 import CartRows from './CartRows'
+import useAxiosSecure from '../../Hooks/useAxiosSecure/useAxiosSecure'
 
 export default function CartPage() {
     const {user} = useAuth()
-    const axiosCommon = useAxiosCommon()
+    const axiosSecure = useAxiosSecure()
     const {data : cartItems = [], isLoading, refetch} = useQuery({
         queryKey : ['cartItems', user?.email],
         queryFn : async() => {
-            const {data} = await axiosCommon.get(`/cart/${user?.email}`);
+            const {data} = await axiosSecure.get(`/cart/${user?.email}`);
             return data
         }
     })
-
     
     return (
         <div className='mt-5'>

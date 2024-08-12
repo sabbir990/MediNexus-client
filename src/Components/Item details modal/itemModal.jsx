@@ -3,7 +3,7 @@ import React from 'react';
 import useAxiosCommon from '../../Hooks/useAxiosCommon/useAxiosCommon';
 
 export default function ItemModal({isOpen, setIsOpen, _id}) {
-    const axiosCommon = useAxiosCommon()
+    const axiosCommon= useAxiosCommon()
     const {data : medicine, isLoading} = useQuery({
         queryKey : ['medicine', _id],
         queryFn : async() => {

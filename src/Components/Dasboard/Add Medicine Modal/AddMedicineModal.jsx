@@ -4,12 +4,10 @@ import toast from 'react-hot-toast';
 import useHostImage from '../../../Hooks/useHostImage/useHostImage';
 import { useMutation, useQueries, useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure/useAxiosSecure';
-import useAxiosCommon from '../../../Hooks/useAxiosCommon/useAxiosCommon';
 
 export default function AddMedicineModal({ isOpen, setIsOpen, refetch }) {
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure()
-    const axiosCommon = useAxiosCommon();
 
     const { mutateAsync } = useMutation({
         mutationFn: async (product) => {
@@ -25,7 +23,7 @@ export default function AddMedicineModal({ isOpen, setIsOpen, refetch }) {
     const { data: categories = [], isLoading } = useQuery({
         queryKey: ['categories'],
         queryFn: async () => {
-            const { data } = await axiosCommon.get('/categories');
+            const { data } = await axiosSecure.get('/categories');
             return data;
         }
     })
@@ -154,24 +152,6 @@ export default function AddMedicineModal({ isOpen, setIsOpen, refetch }) {
                                                 return <option key={index} value={category?.label}>{category?.label}</option>
                                             })
                                         }
-                                        {/* <option value="Antibiotics">Antibiotics</option>
-                                        <option value="Antivirals">Antivirals</option>
-                                        <option value="Antifungals">Antifungals</option>
-                                        <option value="Antipyretics">Antipyretics</option>
-                                        <option value="Antihistamines">Antihistamines</option>
-                                        <option value="Antacids">Antacids</option>
-                                        <option value="Anti-inflammatory Drugs">Anti-inflammatory Drugs</option>
-                                        <option value="Antipsychotics">Antipsychotics</option>
-                                        <option value="Antiemetics">Antiemetics</option>
-                                        <option value="Anticoagulants">Anticoagulants</option>
-                                        <option value="Antihypertensives">Antihypertensives</option>
-                                        <option value="Bronchodilators">Bronchodilators</option>
-                                        <option value="Diuretics">Diuretics</option>
-                                        <option value="Hormones">Hormones</option>
-                                        <option value="Immunosuppressants">Immunosuppressants</option>
-                                        <option value="Laxatives">Laxatives</option>
-                                        <option value="Vitamins and Supplements">Vitamins and Supplements</option>
-                                        <option value="Vaccines">Vaccines</option> */}
 
                                     </select>
                                 </div>

@@ -5,6 +5,7 @@ import toast from 'react-hot-toast';
 import useHostImage from '../../Hooks/useHostImage/useHostImage';
 import { useNavigate } from 'react-router-dom';
 import { TbFidgetSpinner } from "react-icons/tb";
+import { Helmet } from 'react-helmet-async';
 
 
 export default function UpdateProfile() {
@@ -32,6 +33,9 @@ export default function UpdateProfile() {
     }
     return (
         <div>
+            <Helmet>
+                <title>Update Profile</title>
+            </Helmet>
             <div className='flex flex-col items-center mt-8'>
                 <Logo />
                 <div className='text-center mt-4 font-poppins'>

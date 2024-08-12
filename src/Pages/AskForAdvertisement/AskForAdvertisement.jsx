@@ -4,6 +4,7 @@ import useAxiosSecure from '../../Hooks/useAxiosSecure/useAxiosSecure'
 import { useQuery } from '@tanstack/react-query';
 import useAuth from '../../Hooks/useAuth/useAuth';
 import AskForAdvertisementRow from './AskForAdvertisementRow';
+import { Helmet } from 'react-helmet-async';
 
 export default function AskForAdvertisement() {
     const axiosSecure = useAxiosSecure();
@@ -19,6 +20,9 @@ export default function AskForAdvertisement() {
 
     return (
         <div>
+            <Helmet>
+                <title>Ask For Advertisement</title>
+            </Helmet>
             <div className='flex flex-col items-center mt-8'>
                 <Logo />
                 <div className='text-center mt-4 font-poppins'>

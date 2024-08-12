@@ -5,6 +5,7 @@ import useAxiosSecure from '../../Hooks/useAxiosSecure/useAxiosSecure'
 import { useQuery } from '@tanstack/react-query'
 import useAuth from '../../Hooks/useAuth/useAuth'
 import { PieChart } from '../../Components/Chart/AdminChart'
+import { Helmet } from 'react-helmet-async'
 
 const SellerHomepage = () => {
     const axiosSecure = useAxiosSecure();
@@ -20,6 +21,9 @@ const SellerHomepage = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>Seller Homepage</title>
+            </Helmet>
             <div className='mt-12 p-4'>
                 {/* small cards */}
                 <div className='grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-4 mb-10'>

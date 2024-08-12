@@ -1,6 +1,6 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/swiper-bundle.css'; // Import Swiper styles
+import 'swiper/swiper-bundle.css';
 import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
 import { useQuery } from '@tanstack/react-query';

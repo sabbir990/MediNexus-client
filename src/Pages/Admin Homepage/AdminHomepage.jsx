@@ -6,6 +6,7 @@ import { PieChart } from '../../Components/Chart/AdminChart';
 import useAxiosSecure from '../../Hooks/useAxiosSecure/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import { MdOutlinePendingActions } from "react-icons/md";
+import { Helmet } from 'react-helmet-async';
 
 const AdminHomepage = () => {
   const axiosSecure = useAxiosSecure();
@@ -20,6 +21,9 @@ const AdminHomepage = () => {
 
   return (
     <div className='font-poppins'>
+      <Helmet>
+        <title>Admin Homepage</title>
+      </Helmet>
       <div className='mt-12 p-4'>
         {/* small cards */}
         <div className='grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-4 mb-10'>

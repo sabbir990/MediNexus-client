@@ -1,21 +1,22 @@
 import { useQuery } from '@tanstack/react-query'
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import useAxiosCommon from '../../Hooks/useAxiosCommon/useAxiosCommon'
 import Logo from '../../Components/Logo/Logo'
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from './CheckoutForm'
+import useAxiosSecure from '../../Hooks/useAxiosSecure/useAxiosSecure'
+import { Helmet } from 'react-helmet-async';
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY)
 
 export default function CheckOut() {
   const { itemName } = useParams()
-  const axiosCommon = useAxiosCommon()
+  const axiosSecure = useAxiosSecure()
   const { data: selectedMedicine, isLoading, refetch } = useQuery({
     queryKey: ['selectedMedicine', itemName],
     queryFn: async () => {
-      const { data } = await axiosCommon.get(`/selected-medicine/${itemName}`);
+      const { data } = await axiosSecure.get(`/selected-medicine/${itemName}`);
       return data
     }
   })
@@ -31,6 +32,9 @@ export default function CheckOut() {
   
   return (
     <div className='my-10 mx-4'>
+      <Helmet>
+        <title>Checkout</title>
+      </Helmet>
       <div className='flex flex-col items-center space-y-4 justify-center'>
         <Logo />
         <div className='w-40 h-1 bg-blue-500 mx-auto rounded-lg'>

@@ -1,8 +1,8 @@
 import React from 'react';
-import useAxiosCommon from '../../../Hooks/useAxiosCommon/useAxiosCommon';
 import { useMutation } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import useAuth from '../../../Hooks/useAuth/useAuth';
+import useAxiosSecure from '../../../Hooks/useAxiosSecure/useAxiosSecure';
 
 export default function AddToCartModal({ isOpen, setIsOpen, medicine, reFetch }) {
     const {user} = useAuth()
@@ -10,10 +10,10 @@ export default function AddToCartModal({ isOpen, setIsOpen, medicine, reFetch })
     const seletedForCartMedicine = {
         itemName, itemGenericName, shortDescription, itemImage, itemMassUnit, category, company, perUnitPrice, discount, buyerEmail : user?.email, sellerEmail : email
     }
-    const axiosCommon = useAxiosCommon()
+    const axiosSecure = useAxiosSecure()
     const {mutateAsync} = useMutation({
         mutationFn : async() => {
-            const {data} = await axiosCommon.post('/cart', seletedForCartMedicine);
+            const {data} = await axiosSecure.post('/cart', seletedForCartMedicine);
             return data
         },
 

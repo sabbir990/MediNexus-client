@@ -4,6 +4,7 @@ import auth from "../../Firebase/Firebase.config";
 import { GithubAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { useMutation } from "@tanstack/react-query";
 import useAxiosCommon from "../../Hooks/useAxiosCommon/useAxiosCommon";
+import useAxiosSecure from "../../Hooks/useAxiosSecure/useAxiosSecure";
 
 export const AuthContext = createContext(null);
 
@@ -13,7 +14,7 @@ export default function AuthProvider({children}) {
     const [loading, setLoading] = useState(true)
     const googleProvider = new GoogleAuthProvider();
     const githubProvider = new GithubAuthProvider();
-    const axiosCommon = useAxiosCommon();
+    const axiosCommon = useAxiosCommon()
 
     const {mutateAsync} = useMutation({
         mutationFn : async (user) => {
@@ -75,9 +76,17 @@ export default function AuthProvider({children}) {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             if(currentUser){
                 setUser(currentUser)
+                axiosCommon.post('/jwt', {email : currentUser?.email}).then(response => {
+                    if(response.data.token){
+                        localStorage.setItem('token', response.data.token);
+                    }
+                })
+                
                 if(currentUser?.providerData[0]?.providerId !== 'password'){
                     saveUser(currentUser)
                 }
+            }else{
+                localStorage.removeItem('token')
             }
 
             setLoading(false);
