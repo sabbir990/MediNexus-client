@@ -5,7 +5,7 @@ import { useMutation} from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 
 function AdvertisementRequestModal({ isOpen, setIsOpen, refetch, medicine }) {
-    delete medicine._id
+    delete medicine?._id
 
     const advertisementMedicine = {...medicine, status : "requested"}
 

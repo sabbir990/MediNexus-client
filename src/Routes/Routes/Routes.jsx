@@ -26,6 +26,7 @@ import SellerRoute from "../SellerRoute/SellerRoute";
 import RandomRoute from "../RandomRoute/RandomRoute";
 import UserRoute from "../UserRoute/UserRoute";
 import AskForAdvertisement from "../../Pages/AskForAdvertisement/AskForAdvertisement";
+import ManageAdverisement from "../../Pages/Manage Advertisement/ManageAdverisement";
 
 const router = createBrowserRouter([
     {
@@ -174,6 +175,14 @@ const router = createBrowserRouter([
                     <SellerRoute>
                         <AskForAdvertisement />
                     </SellerRoute>
+                </PrivateRoute>
+            },
+            {
+                path : "manage-banner-advertisement",
+                element : <PrivateRoute>
+                    <AdminRoute>
+                        <ManageAdverisement />
+                    </AdminRoute>
                 </PrivateRoute>
             }
         ]
