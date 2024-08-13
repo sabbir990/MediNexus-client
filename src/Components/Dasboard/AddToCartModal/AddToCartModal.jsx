@@ -3,9 +3,11 @@ import { useMutation } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import useAuth from '../../../Hooks/useAuth/useAuth';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure/useAxiosSecure';
+import useRole from '../../../Hooks/useRole/useRole';
 
 export default function AddToCartModal({ isOpen, setIsOpen, medicine, reFetch }) {
-    const {user} = useAuth()
+    const {user} = useAuth();
+    const {role} = useRole();
     const { itemName, itemGenericName, shortDescription, itemImage, itemMassUnit, category, company, perUnitPrice, discount, email } = medicine;
     const seletedForCartMedicine = {
         itemName, itemGenericName, shortDescription, itemImage, itemMassUnit, category, company, perUnitPrice, discount, buyerEmail : user?.email, sellerEmail : email
@@ -28,6 +30,10 @@ export default function AddToCartModal({ isOpen, setIsOpen, medicine, reFetch })
         try{
             if(!user){
                 return toast.error("Login to save this product to cart!")
+            }
+
+            if(role !== 'user'){
+                return toast.error("You must be user for buying from here!")
             }
             await mutateAsync();
         }catch(error){

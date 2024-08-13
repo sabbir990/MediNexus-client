@@ -4,18 +4,20 @@ import { FaCartShopping } from "react-icons/fa6";
 import Logo from "../Logo/Logo";
 import toast from "react-hot-toast";
 import useAuth from '../../Hooks/useAuth/useAuth'
+import useRole from "../../Hooks/useRole/useRole";
 
 const NavBar = () => {
-    const {user, logOut, setUser, setLoading} = useAuth()
+    const { user, logOut, setUser, setLoading } = useAuth()
+    const { role } = useRole()
     const [isOpen, setIsOpen] = useState(true);
 
-    const logOutUser = async() => {
-        try{
+    const logOutUser = async () => {
+        try {
             setLoading(true)
             await logOut()
             toast.success("Logging out successful!");
             setUser(null)
-        }catch(error){
+        } catch (error) {
             console.log(error.message)
             toast.error(error.message)
             setLoading(false)
@@ -95,12 +97,12 @@ const NavBar = () => {
                             >
                                 Join US
                             </NavLink>}
-                            <NavLink
-                            to={'/cart'}
+                            {role === 'user' && <NavLink
+                                to={'/cart'}
                                 className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
                             >
                                 <FaCartShopping />
-                            </NavLink>
+                            </NavLink>}
                         </div>
 
                         {user && <div className="dropdown dropdown-end">
@@ -122,7 +124,7 @@ const NavBar = () => {
                                     </Link>
                                 </li>
                                 <li><NavLink to={'/dashboard'}>Dashboard</NavLink></li>
-                                <li><button onClick={ logOutUser}>Logout</button></li>
+                                <li><button onClick={logOutUser}>Logout</button></li>
                             </ul>
                         </div>}
                     </div>

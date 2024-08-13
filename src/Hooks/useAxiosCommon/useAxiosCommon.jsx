@@ -3,7 +3,7 @@ import React from 'react'
 
 
 const axiosCommon = axios.create({
-    baseURL : 'http://localhost:8000/'
+    baseURL : 'https://medinexusserver.vercel.app'
 })
 export default function useAxiosCommon() {
   return axiosCommon
